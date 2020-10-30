@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<h3>Background Color Change!!!</h3>
+<h3>Background Color Change!!!</h3>
+<h3>Background Color Change!!!</h3>
+<h3>Background Color Change!!!</h3>
+<h3>Background Color Change!!!</h3>
+<h3>Background Color Change!!!</h3>
+<h3>Background Color Change!!!</h3>
+<h3>Background Color Change!!!</h3>
+<script type="text/javascript">
+	//filter: 특정 태그만 빼고 적용하고자 할때 사용
+	// 아래 코드는 글자색은 전체 적용, 배경색은 짝수 번지만 적용
+	// 홀수번지는 odd
+	$('h3').css('color','orange').filter(':even').css('background-color','pink');
+</script>
+<hr>
+<p>0</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<script type="text/javascript">
+	$('p:odd').filter(function(index){
+		if(index==1) return true;
+		else return false;
+	}).css('background-color','yellow');
+	
+	$('p').slice(1,3).css('font-size','2em');
+</script>
+</body>
+</html>

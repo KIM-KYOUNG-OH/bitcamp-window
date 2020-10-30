@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/*style 내에서의 주석처리 */
+	/* class 가 hello 인 경우 무조건 적용*/
+	.hello{
+		font-size: 1.5em;/*1.5배 크기*/
+	}
+	
+	/*span 태그에서 class 가 hello 인 경우에만 적용*/
+	span.hello{
+		color: blue;
+	}
+	
+	/*div 태그중id가 one 인 태그의 바로 아래 태그중 span 태그에 class 가 happy 인 곳에만 적용*/
+	/* > 는 바로 아래 태그만 해당, 공백은 모든 하위태그*/
+	div#one>span.happy{
+		background-color: orange;
+	}
+	
+	/* id 가 one 인 태그에만 적용*/
+	#one{
+		border: 1px solid gray;
+		margin-bottom: 20px;/*아랫쪽 바깥여백*/
+		width: 300px;
+		height: 150px;
+	}
+	
+	/*div 태그의 하위태그중 b태그에만 적용*/
+	div b{
+		border: 5px dotted green;
+	}
+	
+	/*span 태그중 class명이 happy인 태그에만 적용*/
+	span.happy{
+		border-style: groove;
+		border-width: 5px;
+		border-color: gray;
+	}
+</style>
+</head>
+<body>
+<!-- id 는 고유이름으로 각 한번씩만 지정이 가능하다
+반면 class 는 스타일 적용만 하는목적이므로 여러번 사용이 가능하다 -->
+<div id="one">
+	<b class="hello">id one 아래의 class hello</b>
+	<br>
+	<span class="happy hello">id one 아래의 class happy</span>
+</div>
+<div id="two">
+	<b class="hello">id two 아래의 class hello</b>
+	<br>
+	<span class="happy">id two 아래의 class happy</span>
+</div>
+<span class="happy">단독 happy class</span><br>
+<b id="three" class="hello">id three class hello</b>
+</body>
+</html>

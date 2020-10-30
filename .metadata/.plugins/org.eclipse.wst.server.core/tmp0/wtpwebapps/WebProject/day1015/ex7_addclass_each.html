@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	.back_color_0{background-color: orange;}
+	.back_color_1{background-color: magenta;}
+	.back_color_2{background-color: cyan;}
+	.back_color_3{background-color: yellow;}
+	.back_color_4{background-color: pink;}
+</style>
+</head>
+<body>
+<h3>Happy Day!!!</h3>
+<h3>Happy Day!!!</h3>
+<h3>Happy Day!!!</h3>
+<h3>Happy Day!!!</h3>
+<h3>Happy Day!!!</h3>
+<hr>
+<button type='button' id='btn1'>class 적용</button>
+<button type='button' id='btn2'>class 제거</button>
+<script type="text/javascript">
+	$('#btn1').click(function(){
+		$('h3').each(function(index){
+			$(this).addClass("back_color_"+index);
+		});
+	});
+	
+	$('#btn2').click(function(){
+		//$('h3').removeClass()
+		$('h3').each(function(index){
+			$(this).removeClass("back_color_"+index);
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style>
+	h3{
+		cursor: pointer;
+	}
+	h3:active{
+		border: 3px inset gray;
+	}
+	h3:hover{
+		color: red;
+	}
+	div{
+		position: absolute;
+		border: 2px solid gray;
+		width: 300px;
+		height: 300px;
+		border-radius: 200px;
+	}
+	
+	div.red{
+		left: 200px;
+		top: 200px;
+		background-color: red;
+		z-index: 5;
+	}
+	
+	div.green{
+		left: 150px;
+		top: 350px;
+		background-color: green;
+		z-index: 2;
+	}
+	
+	div.blue{
+		left: 40px;
+		top: 200px;
+		background-color: blue;
+		z-index: 3;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$('h3.red').click(function(){
+			$('div.red').css('z-index',3);
+			$('div.green').css('z-index',1);
+			$('div.blue').css('z-index',2);
+		});
+		$('h3.green').click(function(){
+			$('div.red').css('z-index',1);
+			$('div.green').css('z-index',3);
+			$('div.blue').css('z-index',2);
+		});
+		$('h3.blue').click(function(){
+			$('div.red').css('z-index',2);
+			$('div.green').css('z-index',1);
+			$('div.blue').css('z-index',3);
+		});
+	});
+</script>
+</head>
+<body>
+<h3 class='red'>Red를 제일 위로 올리기</h3>
+<h3 class='green'>Green를 제일 위로 올리기</h3>
+<h3 class='blue'>Blue를 제일 위로 올리기</h3>
+
+<div class='red'></div>
+<div class='green'></div>
+<div class='blue'></div>
+</body>
+</html>

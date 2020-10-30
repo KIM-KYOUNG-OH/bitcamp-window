@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+	body *{
+		font-family: 'Gamja Flower', cursive;
+	}
+	#selyear,#selmonth{
+		width: 130px;
+		font-size: 20pt;
+	}
+	
+	#calview{
+		font-size: 15pt;
+		margin-top: 30px;
+	}
+	
+	table{
+		width: 500px;
+		border: 2px solid gray;
+	}
+	
+	table th,table td{
+		border: 1px solid gray;
+		text-align: center;
+	}
+	table tbody tr{
+		height: 50px;	
+		line-height: 50px;	
+	}
+	table thead tr{
+		height: 30px;	
+		line-height: 30px;	
+		background-color: pink;
+		color: blue;
+		font-weight: bold;
+	}
+	
+	table caption{
+		font-size: 22px;
+		font-weight: bold;		
+	}
+</style>
+<script type="text/javascript"> 
+	window.onload=function(){
+		//alert(date.getFullYear());
+		//처음 시작시 일단 현재날짜로 달력그리기
+		writecalendar(curryear, currmonth);
+		
+		var myyear,mymonth;
+		myyear=curryear;
+		mymonth=currmonth;
+		
+		//select 이벤트
+		document.getElementById("selyear").onchange=function(){
+			myyear=this.value;
+			writecalendar(myyear, mymonth);
+		}
+		
+		document.getElementById("selmonth").onchange=function(){
+			mymonth=this.value;
+			writecalendar(myyear, mymonth);
+		}
+	}
+	
+	//달력을 출력하는 사용자 함수
+	function writecalendar(year,month){
+		//alert(year+","+month);
+		//문자로 인식을 하므로 일단 정수로 변환
+		year=parseInt(year);
+		month=parseInt(month);
+		//기존 달력 지우고 다시 그리기
+		cv=document.getElementById("calview");
+		
+		//요일숫자와 endday 구하기
+		var mydate=new Date(year,month-1,1);
+		//선택한 월의 요일숫자구하기
+		var myweek=mydate.getDay();
+		//몇일까지 있는지 구하기
+		var endday=0;
+		switch(month){
+		case 2:
+			if(year%4==0 && year%100!=0 || year%400==0)
+				endday=29;
+			else
+				endday=28;
+			break;
+		case 4: case 6: case 9: case 11:
+			endday=30;
+			break;
+		default:
+			endday=31;
+		}
+		//alert(endday);
+		var s="";
+		s="<table>";
+		s+="<caption>"+year+"년 "+month+" 월 달력</caption>";
+		s+="<thead><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th>";
+		s+="<th>금</th><th>토</th></tr></thead>";
+		s+="<tbody>";		
+		//요일숫자만큼 빈칸 그리기
+		//직전달의 endday 구하기
+		var prevendday=0;
+		switch(month-1){
+		case 2:
+			if(year%4==0 && year%100!=0 || year%400==0)
+				prevendday=29;
+			else
+				prevendday=28;
+			break;
+		case 4: case 6: case 9: case 11:
+			prevendday=30;
+			break;
+		default:
+			prevendday=31;
+		}
+		s+="<tr>";
+		//출력할 시작날짜 구하기
+		prevendday-=(myweek-1);
+		for(i=1;i<=myweek;i++){
+			s+="<td style='color:#ddd'>"+(prevendday++)+"</td>";
+		}
+		
+		//1일부터 endday 까지 반복 출력
+		//단 토요일이 되면 tr 을 닫고 다시 열기
+		for(i=1;i<=endday;i++){
+			//myweek 를 증가하면 토요일은 7의 배수가된다			
+			myweek++;
+			//일요일은 빨강색 글자로 출력
+			//나머지는 검정색으로 출력
+			if(myweek%7==1){
+				s+="<td style='color:red'>"+i+"</td>";
+			}else{
+				s+="<td style='color:black'>"+i+"</td>";
+			}
+			
+			if(myweek%7==0 && i!=endday){
+				s+="</tr><tr>";
+			}
+		}
+		
+		//마지막줄 토요일까지 칸 그리고
+		//다음달 숫자 1부터 회색으로 출력
+		if(myweek%7==0){
+			s+="</tr>";
+		}else{
+			var a=1;
+			while(true){
+				myweek++;
+				s+="<td style='color:#ddd;'>"+a++ +"</td>";
+				if(myweek%7==0)//토요일
+				{
+					s+="</tr>";
+					break;
+				}					
+			}
+		}
+		s+="</tbody>";
+		s+="</table>";		
+		cv.innerHTML=s;
+	}
+</script>
+</head>
+<body>
+<script type="text/javascript">
+	//현재 년도와 월 구하기
+	date=new Date();
+	curryear=date.getFullYear();
+	currmonth=date.getMonth()+1;
+</script>
+<h2>달력 출력-년도와 월을 선택해주세요</h2>
+
+<div id="container">
+	<select id="selyear">
+		<script type="text/javascript">
+			for(i=curryear;i>=1960;i--){
+				var s="<option>"+i+"</option>";
+				document.write(s);
+			}
+		</script>
+	</select>
+	
+	<select id="selmonth">
+		<script type="text/javascript">
+		 for(i=1;i<=12;i++){
+			 if(i==currmonth){
+				 s="<option selected>"+i+"</option>";
+			 }else{
+				 s="<option>"+i+"</option>";
+			 }
+			 document.write(s);
+		 }	
+		</script>
+	</select>
+</div>
+<div id="calview">1</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Handlee&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<style type="text/css">
+	/*@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Nanum+Pen+Script&display=swap');*/
+	/*>:바로 아래의 하위태그를 의미*/
+	#one>table>thead>tr{
+		background-color: orange;
+	}
+	#one>table{
+		width: 300px;
+		font-size: 12pt;
+		border: 5px inset gray;
+		font-family: 'Cute Font';
+	}
+	#one{
+		margin-bottom: 30px;/*바깥쪽 여백*/
+	}
+	/*공백은 하위태그를 의미*/
+	#one>table>thead th
+	{
+		border-bottom: 3px double green;
+		border-right: 1px dotted green; 
+	}
+	
+	#one tbody td{
+		border-bottom: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+	
+	#one .title{
+		font-size: 20pt;
+		font-family: '궁서';
+		font-weight: bold;
+	}
+	
+	#one tbody td{
+		text-align: center;
+	}
+	
+	/*마우스오버일때 스타일*/
+	#one tbody tr:hover{
+		background-color: black;
+		color: white;
+	}
+	
+	#two{
+		border: 1px solid gray;
+		padding: 10px;
+		width: 400px;
+	}
+	
+	#two .title{
+		font-size: 1.5em;
+		font-family: 'Nanum Pen Script';
+	}
+	
+	#two table{
+		font-family: 'Handlee';
+		font-size: 11pt;
+		border: 4px groove gray;
+		width: 400px;
+	}
+	
+	#two table thead tr{
+		background-color: pink;
+		color: blue;		
+	}
+	
+	#two table thead th{
+		border: 1px solid gray;
+	}
+	#two tbody td{
+		border: 1px solid gray;
+	}
+	
+	#two tbody tr td:nth-child(2){
+		background-color: #ffccff;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+<div id="one">
+	<table>
+	  <caption><b class="title">산악회회원</b></caption>
+	  <thead>
+		<tr>
+			<th>이름</th><th>나이</th><th>핸드폰</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	  	<tr>
+	  		<td>이미자</td><td>29세</td><td>010-111-2222</td>
+	  	</tr>
+	  	<tr>
+	  		<td>손호영</td><td>45세</td><td>010-111-5656</td>
+	  	</tr>
+	  	<tr>
+	  		<td>강호동</td><td>11세</td><td>010-111-3434</td>
+	  	</tr>
+	  </tbody>	
+	</table>
+</div>
+<div id="two">
+	<table>
+		<caption><b class="title">사진감상</b></caption>
+		<thead>
+			<th>번호</th><th>사진</th><th>설명</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td rowspan="3">1</td>
+				<td rowspan="3">
+					<img src="../image2/ani09.gif">
+				</td>
+				<td>이름:이쁜이</td>
+			</tr>
+			<tr>
+				<td>날짜 : 2020.10.06
+			</tr>
+			<tr>
+				<td>가격 : 4500원
+			</tr>
+			<tr>
+				<td rowspan="3">2</td>
+				<td rowspan="3">
+					<img src="../image2/08.png">
+				</td>
+				<td>이름:폭탄머리</td>
+			</tr>
+			<tr>
+				<td>날짜 : 2020.10.06
+			</tr>
+			<tr>
+				<td>가격 : 3700원
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

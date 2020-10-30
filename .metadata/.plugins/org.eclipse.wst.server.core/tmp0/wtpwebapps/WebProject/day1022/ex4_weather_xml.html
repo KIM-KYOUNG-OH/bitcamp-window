@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	h3{
+		cursor: pointer;
+		float: left;
+		width: 100px;
+		height: 60px;
+		background-color: #40e0d0;
+		line-height: 60px;
+		margin: 10px;
+		text-align: center;
+		border: 3px inset gray;
+	}
+	
+	h3:hover{
+		background-color: orange;
+	}
+	
+	#out{
+		position: absolute;
+		top: 200px;
+		left: 30px;
+		font-size: 14px;
+	}
+</style>
+<!-- cross domain에 필요한 js파일 -->
+<script type="text/javascript" src="../js/jquery.ajax-cross-origin.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//지역이름을 클릭시 이벤트
+	$("h3").click(function(){
+		var title = $(this).text();
+		// out에 출력
+		$("#out").html(title+" 지역 일기예보<hr>");
+		
+		//ajax로 데이터 가져오기
+		$.ajax({
+			crossOrigin: true,
+			type:"get",
+			url:"https://www.weather.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=108",
+			dataType:"xml",
+			success: function(data){
+				var desc = $(data).find("description").eq(0).text() +"<br>";
+				desc += "<b>일기예보제공날짜 : " +$(data).find("pubDate").text()+ "<b><hr>";				
+				
+				$("#out").html(function(i, html){
+					return html+desc;
+				});
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<h2>지역별 일주일 일기예보 확인하기</h2>
+<h3>서울</h3>
+<h3>인천</h3>
+<h3>수원</h3>
+<h3>파주</h3>
+<h3>춘천</h3>
+<hr>
+<div id="out"></div>
+</body>
+</html>

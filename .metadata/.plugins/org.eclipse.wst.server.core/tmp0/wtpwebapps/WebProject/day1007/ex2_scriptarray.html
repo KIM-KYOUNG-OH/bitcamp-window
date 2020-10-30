@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table {
+		border: 2px solid gray;
+		width: 200px;
+	}
+	
+	table td,table th{
+		border-bottom: 1px solid gray;
+		border-right: 1px dotted gray;
+	}
+</style>
+</head>
+<body>
+<table>
+	<tbody>
+		<tr>
+			<th>번호</th><th>꽃이름</th>			
+		</tr>
+		<script type="text/javascript">
+			//배열 선언
+			//var flowers=['장미꽃','안개꽃','국화꽃','채송화'];
+			var flowers=new Array('장미꽃','안개꽃','국화꽃','채송화');
+			//alert(flowers.length);
+			for(var i=0;i<flowers.length;i++){
+				var s="<tr><td>"+(i+1)+"</td>";
+				s+="<td>"+flowers[i]+"</td></tr>";
+				document.write(s);
+			}
+		</script>
+	</tbody>
+</table>
+<hr>
+<table>
+	<tr>
+		<th>번호</th><th>이미지</th>
+	</tr>
+	<script type="text/javascript">
+		var im=new Array();
+		im[0]='../image/c1.png';
+		im[1]='../image2/01.png';
+		im[2]='../image2/ani09.gif';
+		im[3]='../image2/ani12.gif';
+		for(var i=0;i<im.length;i++){
+			var s="<tr><td align='center'>"+(i+1)+"</td>";
+			s+="<td><img src='"+im[i]+"' width='100'></td></tr>";
+			document.write(s);
+		}	
+	</script>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

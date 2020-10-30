@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=function(){
+	load_settings();
+	document.getElementById('frm').onsubmit=function(e){
+		e.preventDefault(); // 기본 이벤트 무효화 .action 파일로 이동이 안됨
+		//alert('submit');
+		apply_data();
+		
+		// 입력한 값을 로컬 스토리지에 저장하기
+		localStorage.setItem("bg_color", document.getElementById('bg_color').value);
+		localStorage.setItem("text_color", document.getElementById('text_color').value);
+		localStorage.setItem("text_size", document.getElementById('text_size').value);
+		
+		//happy파일로 이동하기
+		location.href = "happy.html";
+	}
+}
+
+// 사용자 함수
+// 처음 로칼스토리지로부터 값을 가져와서 환경 설정하기
+function load_settings(){
+	if(localStorage.bg_color != undefined){
+		document.getElementById('bg_color').value = localStorage.bg_color;
+	}
+	if(localStorage.text_color != undefined){
+		document.getElementById('text_color').value = localStorage.text_color;
+	}
+	if(localStorage.text_size != undefined){
+		document.getElementById('text_size').value = localStorage.text_size;
+	}
+	
+	apply_data(); // 가져온 값 적용시키기
+}
+
+// 로컬 스토리지값 적용
+function apply_data(){
+	f = document.getElementById('colors');
+	f.style.backgroundColor = document.getElementById('bg_color').value;
+	f.style.color = document.getElementById("text_color").value;
+	f.style.fontSize=document.getElementById('text_size').value;
+}
+
+</script>
+</head>
+<body>
+	<form action="#" id='frm'>
+		<fieldset id='colors' style='width: 400px;'>
+			<legend>색상 선택</legend>
+			<ul>
+				<li><label for='bg_color'>배경색</label> <input type='text'
+					value='' id='bg_color'></li>
+				<li><label for='text_color'>글자색</label> <input type='text'
+					value='' id='text_color'></li>
+				<li><label for='text_size'>글자크기</label> <select id='text_size'>
+						<option>16px</option>
+						<option>19px</option>
+						<option>23px</option>
+						<option>30px</option>
+				</select></li>
+			</ul>
+			<input type='submit' value='로칼스토리지에 환경 저장하기'>
+		</fieldset>
+	</form>
+</body>
+</html>

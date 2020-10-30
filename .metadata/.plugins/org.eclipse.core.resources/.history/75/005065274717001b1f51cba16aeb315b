@@ -1,0 +1,48 @@
+package ajax.mem.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+
+import oracle.db.OracleConnect;
+
+public class MemoDao {
+
+	OracleConnect db;
+	public MemoDao() {
+		db = OracleConnect.getInstance();	
+	}
+	
+	// insert
+	public void memoInsert(MemoDto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into memo (num, nickname, content, avata, writeday) "
+				+"values (seq1.nextval, ?,?,?,sysdate)";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getNickname());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getAvata());
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	// 전체 데이터 반환하는 메서드
+	public Vector<MemoDto> getAllDatas(){
+		Vector<MemoDto> list = new Vector<MemoDto>();
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rSet = null;
+		String sqlString="select * from memo order by num desc";
+		
+		return list;
+	}
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	img.selavata, img.up_selavata{
+		width: 50px;
+		height: 50px;
+		cursor: pointer;
+	}
+	
+	img.select{
+		border: 2px solid red;
+	}
+	
+	#buttons{
+		width: 500px;
+		text-align: center;
+		border: 3px groove gray;
+		padding: 15px;
+		margin-bottom: 20px;
+	}
+	
+	#list{
+		width: 500px;
+	}
+	
+	div.row{
+		border: 1px solid gray;
+		margin-bottom: 5px;
+		margin-left: 20px;
+		padding: 5px;
+		border-radius: 10px;
+	}
+	
+	div.row pre{
+		border: none;
+		background-color: white;
+	}
+	
+	a.delete, a.update{
+		margin-left: 20px;
+		color: red;
+		cursor: pointer;
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	// 처음 시작시 일단 목록 부분만 보이도록 하기
+	$("#inputform").hide();
+	$("#updateform").hide();
+	$("#list").show();
+	// 초기 데이터 출력
+	dataList();
+	
+	$("#selec img").click(function(){
+		var select_img = $(this).attr('src');
+		$("#selec input").attr('value', select_img);
+		$('#selec img').removeClass('select');
+		$(this).addClass('select');
+	});
+	
+	//submit 이벤트
+	$('#frm').submit(function(e){
+		// 기본 이벤트 무효화
+		e.preventDefault(); //이거 안주면 action을 호출하려고 함
+		// 데이터 추가하는 함수 호출
+		addData();
+	});
+	
+	$("#btnadd").click(function(){
+		$("#inputform").show();
+		$("#updateform").hide();
+		$("#list").hide();
+	});
+	
+	$("#btnlist").click(function(){
+		$("#inputform").hide();
+		$("#updateform").hide();
+		$("#list").show();
+	});
+	
+	//삭제 이벤트 (나중에 생성되었으므로 on 함수로 해야합니다)
+	$(document).on("click", "a.delete", function(e){
+		// a태그의 기본 이벤트 무효화
+		e.preventDefault();
+		// 속성에 넣어둔 num 읽기
+		var num = $(this).attr("num");
+		$.ajax({
+			type: "get",
+			url: "./datadelete.jsp",
+			data:{"num":num},
+			dataType:'html',
+			succenss:function(data){
+				alert('삭제되었습니다');
+				dataList();
+			}
+		});
+	});
+	
+	//a태그의 수정부분
+	$(document).one('click', 'a.update', function(e) {
+		// 기본 이벤트 실행 안되도록 하기
+		e.preventDefault();
+		$('#updateform').show();
+		$("#list").hide();
+		var num = $(this).attr("num");
+		// num을 백엔드쪽으로 보내고 백엔드로부터 json데이터를 받아서 수정폼에 넣어준다
+		$.ajax({
+			type: "get",
+			url: "./dataupdate.jsp",
+			data:{"num":num},
+			dataType:'json',
+			success:function(data){
+				$("#up_num").val(data.num);
+				$("#up_nickname").val(data.nickname);
+				$("#up_content").val(data.content);
+				$("#up_avata").val(data.avata);
+				
+				$("img.up_selavata").removeClass("select");
+				var imgSrc = "#updateform img[src='"+data.avata+"']";
+				$(imgSrc).addClass("select");
+				$("#list").hide();
+				$("#updateform").show();
+			}
+		});
+	});
+	// 수정폼의 목록보기 버튼
+	$("#up_btnlist").click(function(){
+		$("#list").show();
+		$("#updateform").hide();
+		
+	});
+});
+
+function addData(){
+	var nick = $("#nickname").val();
+	var content = $("#content").val();
+	var avata = $("#avata").val();
+	
+	//db에 저장하기 위한 ajax처리
+	$.ajax({
+		type:"post",
+		url:'./readdata.jsp',
+		dataType:"html",
+		data:{"nick":nick,"content":content,"avata":avata},
+		success:function(data){
+			// 데이터 추가가 성공하면
+			// 전체 목록 다시 출력하기
+			dataList();
+			
+			// 입력폼 초기화
+			$("#nickname").val("");
+			$("#content").val("");
+			$("#avata").val("../image2/03.png");
+			$("img.selavata").removeClass("select");
+			$("img.selavata:eq(2)").addClass("select");
+		}
+	});
+}
+
+function dataList(){
+	//alert("다시 전체 데이터 출력하기");
+	$.ajax({
+		type:"get",
+		url:'./datalist.jsp',
+		dataType:'xml',
+		success:function(data){
+			var s = "<b style='color:red;'>총 "
+			+($(data).find('board').length)+"개의 글이 있습니다</b><br><br>";
+			//board갯수 만큼 반복처리
+			$(data).find('board').each(function(i, element){
+				var n = $(element); //$(this)도 가능
+				var num = n.attr("num");
+				s += "<div class='row'>";
+				s += "<b>" + n.find("nickname").text()+"</b>";
+				s += "<span style='color: #ccc; margin-left: 100px;'>"+
+				n.find('writeday').text()+"</span><br>";
+				s += "<img src='" +n.find("avata").text()+"' class='photo' align='left'>";
+				s += "<pre>" +n.find("content").text()+ "</pre>";
+				s += "<likes>좋아요 "+n.attr("likes")+"</likes><br><br>";
+				s += "<a class='delete' num='"+num+"'>delete</a>";
+				s += "<a class='update' num='"+num+"'>update</a>";
+				s += "</div>";
+				s += "<hr>";
+			});
+			$("#list").html(s);
+		}
+	});
+}
+
+</script>
+</head>
+<body>
+<div id='buttons'>
+	<button type='button' class='btn btn-default'
+	style='width: 120px;' id ='btnadd'>데이터 추가</button>
+	<button type='button' class='btn btn-default'
+	style='width: 120px;' id ='btnlist'>전체목록보기</button>
+</div>
+<div id="inputform">
+	<h3>Memo 데이터 추가하기</h3>
+	<form action="#" class='form-inline' id='frm'>
+	<table class='table table-bordered' style='width: 400px;'>
+		<tr>
+			<th width="100" bgcolor='#ddd'>닉네임</th>
+			<td>
+				<input type='text' class = "form-control input-sm" id='nickname'
+				required='required' placeholder="닉네임" style='width: 120px;'>
+			</td>
+		</tr>
+		<tr>
+			<th width="100" bgcolor='#ddd'>내용</th>
+			<td>
+				<textarea style='width: 250px; height: 100px;' class='form-control'
+				id='content' required='required' placeholder="내용 반드시 입력"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th width="100" bgcolor='#ddd'>아바타</th>
+			<td id='selec'>
+				<input type='text' style='width: 200px;' class='form-control'
+				id='avata' required='required' placeholder="readonly" value='../image2/03.png'></input>
+				<br><br>
+				<img alt="" src="../image2/01.png" class='selavata'>
+				<img alt="" src="../image2/02.png" class='selavata'>
+				<img alt="" src="../image2/03.png" class='selavata select'>
+				<img alt="" src="../image2/04.png" class='selavata'>
+				<img alt="" src="../image2/05.png" class='selavata'>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2' align='center'>
+				<button type='submit' class='btn btn-sm btn-info'>DB추가</button>
+				<button type='button' class='btn btn-sm btn-danger'>Reset</button>
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
+<div id='list'>list</div>
+<div id="updateform">
+	<h3>Memo 데이터 수정하기</h3>
+	<form action="#" class='form-inline' id='updatefrm'>
+	<table class='table table-bordered' style='width: 400px;'>
+		<tr>
+			<th width="100" bgcolor='#ddd'>닉네임</th>
+			<td>
+				<input type='text' class = "form-control input-sm" id='up_nickname'
+				required='required' placeholder="닉네임" style='width: 120px;'>
+			</td>
+		</tr>
+		<tr>
+			<th width="100" bgcolor='#ddd'>내용</th>
+			<td>
+				<textarea style='width: 250px; height: 100px;' class='form-control'
+				id='up_content' required='required' placeholder="내용 반드시 입력"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th width="100" bgcolor='#ddd'>아바타</th>
+			<td id='selec'>
+				<input type='text' style='width: 200px;' class='form-control'
+				id='up_avata' required='required' placeholder="readonly" value='../image2/03.png'></input>
+				<br><br>
+				<img alt="" src="../image2/01.png" class='up_selavata'>
+				<img alt="" src="../image2/02.png" class='up_selavata'>
+				<img alt="" src="../image2/03.png" class='up_selavata select'>
+				<img alt="" src="../image2/04.png" class='up_selavata'>
+				<img alt="" src="../image2/05.png" class='up_selavata'>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2' align='center'>
+				<button type='submit' class='btn btn-sm btn-info'>DB수정</button>
+				<button type='reset' id='up_btnlist' class='btn btn-sm btn-danger'>목록보기</button>
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<ul>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+  <li>five</li>
+  <li>six</li>
+  <li>seven</li>
+</ul>
+<script type="text/javascript">
+	// li 태그중 첫번째 것과 마지막것에 css적용하기
+	$("li:first, li:last").css("background-color","orange");
+	// eq는 해당 번지에 css 적용(0부터...)
+	$("li:eq(2)").css("color",'green');
+	// li(n):n번지 이전에만 적용(0~3번지까지 적용)
+	$("li:lt(4)").css("border","2px dotted red");
+	// gt(n):n번지 이후에만 적용(5번부터 적용)
+	$("li:gt(4)").css("text-decoration",'underline');
+	
+</script>
+</body>
+</html>

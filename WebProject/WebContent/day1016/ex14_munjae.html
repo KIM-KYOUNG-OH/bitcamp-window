@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+	#home{
+		width: 500px;
+		position: absolute;
+		left: 300px;
+		top: 300px;
+		z-index: 2;
+	}
+	
+	#musics{
+		position: absolute;
+		left: 300px;
+		top: 50px;
+		border: 2px inset orange;
+		font-family: 'Anton', sans-serif;
+	}
+	
+	#musics ol{
+		margin: 20px;
+	}
+	
+	#musics li{
+		cursor: pointer;
+		margin-left: 0;
+		height: 40px; 
+	}
+	
+	.homeIn{
+		position: absolute;
+		left: 350px;
+		top: 320px;
+		z-index: 1;
+	}
+	
+	#m1{
+		background-image: url('../image2/cd-sprite.png');
+		width: 360px; height: 365px;
+		background-position: left top;
+		background-size: 100%; 
+	}
+	#m2{
+		background-image: url('../image2/cd-sprite.png');
+		width: 360px; height: 365px;
+		background-position: left center;
+		background-size: 100%;
+	}
+	#m3{
+		background-image: url('../image2/cd-sprite.png');
+		width: 360px; height: 365px;
+		background-position: left bottom;
+		background-size: 100%;
+	}
+	
+</style>
+</head>
+<body>
+<img id='home' alt="" src="../image2/cover.png">
+<div class='homeIn' id='m1'></div>
+<div class='homeIn' id='m2'></div>
+<div class='homeIn' id='m3'></div>
+<div id=musics>
+	<ol>
+		<li id='music1'>Lost Stars</li>
+		<li id='music2'>A Higher Place</li>
+		<li id='music3'>Like a Fool</li>
+	</ol>
+</div>
+<script type="text/javascript">
+	$('#music1').hover(function(){
+		$(this).css({
+			'font-weight':'bold',
+			'color':'red'
+		});
+		$('#m1').animate({'left':'+=300'}, 'slow')
+		
+	}, function(){
+		$('#m1').animate({'left':'-=300'}, 'fast')
+		$(this).css({
+			'font-weight':'normal',
+			'color':'black'
+		});
+	});
+	
+	$('#music2').hover(function(){
+		$(this).css({
+			'font-weight':'bold',
+			'color':'red'
+		});
+		$('#m2').animate({'left':'+=300'}, 'slow')
+		
+	}, function(){
+		$('#m2').animate({'left':'-=300'}, 'fast')
+		$(this).css({
+			'font-weight':'normal',
+			'color':'black'
+		});
+	});
+	
+	$('#music3').hover(function(){
+		$(this).css({
+			'font-weight':'bold',
+			'color':'red'
+		});
+		$('#m3').animate({'left':'+=300'}, 'slow')
+		
+	}, function(){
+		$('#m3').animate({'left':'-=300'}, 'fast')
+		$(this).css({
+			'font-weight':'normal',
+			'color':'black'
+		});
+	});
+</script>
+</body>
+</html>

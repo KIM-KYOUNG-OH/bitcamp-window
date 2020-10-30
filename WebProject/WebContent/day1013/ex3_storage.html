@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload=function(){
+		k = document.getElementById("k")
+		v = document.getElementById("v")
+		e = document.getElementById("entries")
+		s = document.getElementById("save")
+		r = document.getElementById("remove")
+		
+		// 로딩시 전체 스토리지 출력
+		showAll();
+		// storage에 변화가 생기면 함수 자동호출
+		window.addEventListener("storage" ,showAll, false);
+		
+		// 저장 이벤트
+		//s.onclick=save;
+		s.addEventListener("click",save,false);
+		
+		//select change하면 key값과 value값 출력하기
+		e.onchange=function(){
+			var sel = e.options[e.selectedIndex];
+			//alert(sel.value);
+			k.value = sel.value;
+			v.value = localStorage.getItem(k.value);
+		}
+		
+		r.onclick = function(){
+			// localStorage.removeItem(k.value);
+			delete localStorage[k.value];
+			showAll();
+			k.value="";
+			v.value="";
+		}
+	}
+	
+	// 사용자 함수
+	function showAll(){
+		// 기존 select option 모두 삭제
+		e.innerHTML="";
+		for(var i=0; i<localStorage.length; i++){
+			var k=localStorage.key(i);
+			e.options[e.options.length] = new Option(k+":"+
+					localStorage[k],k); //실제 보이는 option값, value값
+			//<option value="값">보이는 값</option>
+		}
+	}
+	
+	function save(){
+		// 로컬스토리지에 입력한 값을 저장한다(키, 값 쌍으로)
+		localStorage[k.value]=v.value;
+		k.value="";
+		v.value="";
+		showAll();
+	}
+	
+</script>
+</head>
+<body>
+<h1>Local Storage Viewer</h1>
+Key : <input type="text" id="k"><br>
+Value : <input type="text" id="v"><br>
+<button type='button' id = 'save'>저장</button>
+<button type='button' id = 'remove'>삭제</button>
+<select id='entries' size='10' style='width: 200px;'></select>
+</body>
+</html>

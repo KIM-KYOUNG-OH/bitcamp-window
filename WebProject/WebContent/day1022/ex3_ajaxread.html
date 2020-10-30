@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	if(window.XMLHttpRequest){
+		var xhr = new XMLHttpRequest();
+	}else{
+		alert("Ajax를 지원하지 않는 브라우저입니다")
+	}
+	document.getElementById("btn1").onclick = function(){
+		xhr.open('get', '../day1021/person_to_json.jsp', true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4 && xhr.status == 200){
+				process();
+			}
+		}
+		xhr.send(null);
+	}
+	
+	function process(){
+		var textData = xhr.responseText;
+		var data = JSON.parse(textData);
+		
+		var len = data.person.length;
+		
+		var h = "";
+		h += '<table class="table table-bordered"><thead><tr>';
+		h += '<th>번호</th><th>이름</th><th>혈액형</th><th>자바점수</th><th>스프링점수</th><th>키</th><th>생일</th>';
+		h += '</tr></thead><tbody id="tb"></tbody></table>';
+		//인원수만큼 반복해서 데이터 출력하기
+		document.getElementById('out').innerHTML = h;
+		
+		var s = "";
+		for(var i=0; i<len; i++){
+			s+= "<tr>";
+			s+= "<td>" +(i+1)+ "</td>";
+			s+= "<td>"+data.person[i].name+"</td>";
+			s+= "<td>"+data.person[i].blood.toUpperCase()+"형</td>";
+			s+= "<td>"+data.person[i].java+"점</td>";
+			s+= "<td>"+data.person[i].spring+"점</td>";
+			s+= "<td>"+data.person[i].height+"cm</td>";
+			s+= "<td>"+data.person[i].birth+"</td>";
+			s+= "</tr>"
+		}
+		document.getElementById('tb').innerHTML = s;
+	}
+}
+
+$(function(){
+	$("#btn2").click(function(){
+		$.ajax({
+			type: "get",
+			url: "../day1021/sawonxml.jsp",
+			dataType: "xml",
+			success:function(data){
+				var h = "";
+				h += "<table class='table table-bordered'><thead><tr><th>번호</th>";
+				h += "<th>이름</th><th>부서</th><th>급여</th><th>세금</th></tr></thead>";
+				h += "<tbody id='tb2'></tbody></table>";
+				$("#out").html(h);
+				
+				s = "";
+				$(data).find("item").each(function(i,ele){
+					var n = $(ele);
+					s += "<tr>"
+					s += "<td>"+ (i+1)+ "</td>";
+					s += "<td>" +n.find("name").text() + "</td>";
+					s += "<td>" +n.find("buseo").text() + "</td>";
+					s += "<td style='text-align: right;>" +n.find("pay").text() + "</td>";
+					s += "<td style='text-align: right;'>" +n.find("tax").text() + "</td>";
+					s += "</tr>";
+				});
+				$("#tb2").html(s);
+			},
+			statusCode:{
+				404:function(){
+					alert("json 파일을 찾을 수 없어요");
+				},
+				500:function(){
+					alert("서버오류..코드를 다시한번 살펴보세요");
+				}
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<h1>jQuery의 ajax함수를 이용해서 json & xml 데이터 읽기</h1>
+<button type='button' id="btn1" class="btn btn-danger btn-sm" style="width: 150px;" >JSON 데이터 출력</button>
+<button type='button' id="btn2" class="btn btn-danger btn-sm" style="width: 150px;" >XML 데이터 출력</button>
+<hr>
+<div id='out' class='alert alert-default'>
+</div>
+</body>
+</html>

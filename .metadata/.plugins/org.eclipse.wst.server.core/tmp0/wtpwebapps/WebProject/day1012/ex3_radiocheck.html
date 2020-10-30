@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table{
+		width: 500px;
+		border: 3px solid gray;
+	}
+	
+	tr,th,td{
+		border: 1px solid gray;
+		border-collapse: collapse;/*칸사이공간없앰*/
+		font-size: 10pt;
+	}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	//프로그레스바 출력부터
+	p=document.getElementById("p");
+	pout=document.getElementById("pout");
+	document.getElementById("btnp").onclick=function(){
+		//30~100 사이의 난수 구하기
+		num=parseInt(Math.random()*71)+30;
+		//p.value=num;
+		//pout.innerHTML="<b>"+num+"</b>";
+		var n=0;
+		inter=setInterval(function() {
+			++n;
+			p.value=n;
+			pout.innerHTML="<b>"+n+"</b>";
+			if(n==num){
+				//타이머 종료
+				clearInterval(inter);
+			}
+			
+		},30);
+	}
+	
+	//결과 출력할곳
+	r=document.getElementById("result");
+	//결과보기 버튼 이벤트
+	document.getElementById("btnresult").onclick=function(){
+		//출력할 변수
+		var s="<h4>결과 출력</h4>";
+		s+="최종 학력 :"+frm.grade.value+"<br>";
+		/* s+="최종 학력 :";
+		for(i=0;i<frm.grade.length;i++){
+			if(frm.grade[i].checked==true)
+				s+=frm.grade[i].value+"<br>";
+		} */
+		
+		s+="가능한 언어종류:";
+		var blang=false;
+		for(i=0;i<frm.lang.length;i++){
+			if(frm.lang[i].checked){
+				blang=true;
+				s+="["+frm.lang[i].value+"]";
+			}
+		}
+		if(!blang){
+			s+="없음";
+		}
+		s+="<br>";
+		s+="여행하고 싶은 나라 :"+frm.nara.value+"<br>";
+		s+="나의 키:"+frm.height.value+"<br>";
+		s+="나의 몸무게:"+frm.weight.value+"<br>";
+		s+="나의 호감도:"+p.value+"<br>";
+		
+		r.innerHTML=s;
+	}
+	
+}
+</script>
+</head>
+<body>
+<form action="#" name="frm">
+	<table>
+		<caption><b>Radio & Checkbox연습</b></caption>
+		<tr height="30">
+			<td>
+				<b>최종 학력을 선택하세요</b><br>
+				<input type="radio" name="grade" value="고등학교">고등학교&nbsp;
+				<input type="radio" name="grade" value="전문대">전문대&nbsp;
+				<input type="radio" name="grade" value="4년제대" checked="checked">4년제대&nbsp;
+				<input type="radio" name="grade" value="대학원">대학원&nbsp;
+			</td>
+		</tr>
+		<tr height="30">
+			<td>
+				<b>구현 가능한 언어를 모두 선택하세요</b><br>
+				<input type="checkbox" name="lang" value="c언어">c언어&nbsp;
+				<input type="checkbox" name="lang" value="java">java&nbsp;
+				<input type="checkbox" name="lang" value="html">html&nbsp;
+				<input type="checkbox" name="lang" value="spring">spring				
+			</td>
+		</tr>
+		<tr height="30">
+			<td>
+				<b>여행하고싶은 나라를 입력하세요</b><br>
+				<input type="text" name="nara" list="country" size="10">
+				<datalist id="country">
+					<option value="하와이">
+					<option value="미국">
+					<option value="태국">
+					<option value="프랑스">
+					<option value="스페인">
+					<option value="캐나다">					
+				</datalist>			
+			</td>
+		</tr>
+		<tr height="30">
+			<td>
+				<b>당신의 키와 몸무게를 선택&입력하세요</b><br>
+				<input type="number" name="height" min="150" max="190" step="5" value="160"
+				placeholder="키">
+				&nbsp;&nbsp;&nbsp;
+				<input type="number" name="weight" min="45" max="90" step="2" value="55"
+				placeholder="몸무게">				
+			</td>
+		</tr>
+		<tr height="30">
+			<td>
+				<b>당신에 대한 호감도는?</b>
+				<progress id="p" value="0" max="100" style="width:200px;"></progress>		
+				&nbsp;
+				<span id="pout">0</span>&nbsp;&nbsp;
+				<button type="button" id="btnp">start</button>
+			</td>
+		</tr>
+		<tr height="30">
+			<td align="center">
+				<button type="button" id="btnresult" style="width: 200px;font-size: 13px;">
+				결과 확인</button>
+			</td>
+		</tr>
+	</table>
+</form>
+<div id="result" style="font-size: 13px;"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

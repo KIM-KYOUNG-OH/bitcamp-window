@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("button:eq(0)").click(function(){
+		$.getJSON("ex6_munjejson.json", function(data) {
+			var s= "";
+			$.each(data, function(idx, item) {
+				s+= "<b>"+idx+"번 데이터</b><br>";
+				s+= "name : "+item.name+"<br>";
+				s+= "hobby :";
+				if(item.hobby == null){
+					s+= "취미 없음<br>";
+				}else{
+					$.each(item.hobby, function(i, elem){
+						s+= "[" +elem+ "]";
+					});
+					s+= "<br>";
+					
+				}
+				s+= "age : " +item.age+"<br>";
+				s+= "KOR : " + (item.score.kor==null?"미시험":item.score.kor+"점")+"<br>";
+				s+= "ENG : " + (item.score.eng==null?"미시험":item.score.eng+"점")+"<br>";
+				s+= "MAT : " + (item.score.mat==null?"미시험":item.score.mat+"점")+"<br>";
+				s+= "<hr>";
+			});
+			$("#out1").html(s);
+		});
+	});
+	
+	$("button:eq(1)").click(function(){
+		$.get("ex6_munjexml.xml", function(data){
+			var s = "";
+			$(data).find("data").each(function(i, element){
+				var n = $(this);
+				s+= "<b>" +(i+1)+ "번 데이터</b><br>";
+				s+= "id : " +n.attr("id")+ "<br>";
+				s+= "name : " +n.attr("name")+ "<br>";
+				s+= "subject : " +n.find("subject").text()+ "<br>";
+				s+= "photo :<br><img src='" +n.find("photo").text()+ "'>";
+				s+= "<hr>";
+			});
+			$("#out2").html(s);
+		});
+	});
+});
+</script>
+</head>
+<body>
+<button type='button' class="btn btn-danger btn-sm">JSON 데이터 출력</button>
+<div id='out1' class='alert alert-default'></div>
+<hr>
+<button type='button' class="btn btn-danger btn-sm">XML 데이터 출력</button>
+<div id='out2' class='alert alert-default'></div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>간단계산기</title>
+<style type="text/css">
+ #num{
+ 	width: 430px;
+ 	font-size: 28px;
+ 	text-align: right;
+ 	padding: 5px;
+ }
+ 
+ .stbtn1{
+ 	width: 100px;
+ 	height: 100px;
+ 	margin-right: 10px;
+ 	margin-bottom: 10px;
+ 	font-size: 30px;
+ 	color: red;
+ 	cursor: pointer;
+ }
+ .stbtn2{
+ 	width: 100px;
+ 	height: 100px;
+ 	margin-right: 10px;
+ 	margin-bottom: 10px;
+ 	font-size: 30px;
+ 	color: black;
+ 	cursor: pointer;
+ }
+ .stbtn3{
+ 	width: 100px;
+ 	height: 100px;
+ 	margin-right: 10px;
+ 	margin-bottom: 10px;
+ 	font-size: 30px;
+ 	color: magenta;
+ 	cursor: pointer;
+ }
+ 
+ #container{
+ 	padding: 10px;
+ 	border: 7px groove gray;
+ 	width: 470px; 	
+ }
+</style>
+<script type="text/javascript">
+	var su1,su2,op;
+	var bDot,bFirst;
+	
+	window.onload=function(){
+		//초기값 지정
+		bDot=false;//점을 찍으면 true로 변경,지우면 다시 false로 변경
+		bFirst=true;//true일땐 숫자를 바로 출력,false일땐 현재숫자에 더해서 출력
+		n=document.getElementById("num");	
+		ct=document.getElementById("container");
+		
+		//버튼1 이벤트
+		document.getElementById("btn1").onclick=function(){
+			//alert(ct.style.visibility);
+			//alert(this.innerHTML);
+			if(this.innerHTML=='숨기기'){
+				ct.style.visibility='hidden';
+				this.innerHTML='계산기';
+			}else{
+				ct.style.visibility='visible';
+				this.innerHTML='숨기기';
+			}
+		}
+		
+		//버튼2 이벤트
+		document.getElementById("btn2").onclick=function(){
+			//alert(ct.style.diplay);
+			if(this.innerHTML=='숨기기'){
+				ct.style.display='none';
+				this.innerHTML='계산기';
+			}else{
+				ct.style.display='block';
+				this.innerHTML='숨기기';
+			}
+		}
+	}
+	//사용자 함수
+	//0~9까지의 숫자 버튼 클릭시 호출
+	function goNum(su){
+		//첫번째 숫자일땐 새로찍고 두번째부터는 누적해서 더하기
+		if(bFirst){
+			n.value=su;
+			bFirst=false;
+		}else{
+			n.value+=su;
+		}
+	}
+	//C 눌렀을때 호출
+	function goClear(){
+		//전체 완전 초기화
+		su1="";
+		su2="";
+		op="";
+		bDot=false;
+		bFirst=true;
+		n.value="0";
+	}
+	//CE 눌렀을때 호출
+	function goCE(){
+		//현재 출력창과 관련된 변수만 초기화
+		su2="";
+		bDot=false;
+		bFirst=true;
+		n.value="0";
+	}
+	
+	//연산자 눌렀을때 호출
+	function goOper(oper){
+		//전달받은 연산자 전역변수에 저장
+		op=oper;		
+		//bool 변수들 초긱화
+		bDot=false;
+		bFirst=true;
+		
+		//현재 숫자는 su1에 저장하기
+		su1=n.value.trim();//혹시 공백이 앞뒤로 있을경우 제거후 저장
+	}
+	
+	//.(dot) 눌렀을때 호출
+	function goDot()
+	{
+		if(!bDot){
+			n.value+=".";
+			bDot=true;
+		}
+	}
+	
+	//back 키 눌렀을때 호출
+	function goBack()
+	{
+		//입력창의 숫자 길이를 구한다
+		var len=n.value.length;
+		
+		//마지막값이 . 일경우 bDot를 false 로 변경한다
+		//if(n.value.indexOf(".")==len-1){
+		if(n.value.charAt(len-1)=="."){
+			//alert("dot");
+			bDot=false;
+		}
+		//전체길이-1 개만큼 추출해서 더시 출력
+		var s=n.value.substring(0,len-1);
+		n.value=s;
+		
+		//다 지워지면 0 으로 출력,bFirst 는 true로 변경
+		if(s==''){
+			n.value="0";
+			bFirst=true;
+		}
+	}
+	
+	// +/- 클릭시 호출
+	function goSign()
+	{
+		n.value=n.value*-1;
+	}
+	
+	//= 클릭시 호출
+	function goEqual()
+	{
+		//현재창의 값을 su2에 저장
+		su2=n.value;
+		//계산 결과를 su1에 저장
+		su1=eval(su1+op+su2);
+		//su을 결과창에 출력
+		n.value=su1;		
+	}
+</script>
+</head>
+<body>
+<button type="button" id="btn1">숨기기</button>
+<button type="button" id="btn2">숨기기</button>
+<br><br>
+<div id="container">
+	<input type="text" value="0" id="num"><br><br>
+	<!-- 1줄 -->
+	<button type="button" class="stbtn1" onclick="goSign()">+/-</button>
+	<button type="button" class="stbtn1" onclick="goCE()">CE</button>
+	<button type="button" class="stbtn1" onclick="goClear()">C</button>
+	<button type="button" class="stbtn1" onclick="goBack()">←</button>
+	<br>
+	
+	<!-- 2줄 -->
+	<input type="button" value="7" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="8" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="9" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="/" class="stbtn3" onclick="goOper(value)">
+	<br>
+	
+	<!-- 3줄 -->
+	<input type="button" value="4" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="5" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="6" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="*" class="stbtn3" onclick="goOper(value)">
+	<br>
+	
+	<!-- 4줄 -->
+	<input type="button" value="1" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="2" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="3" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="+" class="stbtn3" onclick="goOper(value)">
+	<br>
+	
+	<!-- 5줄 -->
+	<input type="button" value="0" class="stbtn2" onclick="goNum(value)">
+	<input type="button" value="." class="stbtn3" onclick="goDot()">
+	<input type="button" value="=" class="stbtn3" onclick="goEqual()">
+	<input type="button" value="-" class="stbtn3" onclick="goOper(value)">	
+</div>
+<img alt="" src="../image2/ani09.gif">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

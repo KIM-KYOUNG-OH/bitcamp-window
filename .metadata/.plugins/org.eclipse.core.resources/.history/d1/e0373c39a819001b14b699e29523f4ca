@@ -1,0 +1,22 @@
+<%@page import="ajax.note.db.NoteDao"%>
+<%@page import="ajax.note.db.NoteDto"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String title = request.getParameter("title");
+	String description = request.getParameter("description");
+	String commention = request.getParameter("commention");
+	String image = request.getParameter("image");
+	String duedate = request.getParameter("dueDate");
+	
+	NoteDto dto = new NoteDto();
+	
+	dto.setTitle(title);
+	dto.setDescription(description);
+	dto.setCommention(commention);
+	dto.setImage(image);
+	dto.setDueDate(duedate);
+	
+	NoteDao dao = new NoteDao();
+	dao.addData(dto);
+%>

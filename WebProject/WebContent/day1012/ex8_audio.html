@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#songlist{
+		position: absolute;
+		left: 400px;
+		top: 20px;
+		border: 5px inset gray;
+	}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	m=document.getElementById("mymusic");
+	btn=document.getElementById("btn");
+	btn2=document.getElementById("btn2");
+	btn3=document.getElementById("btn3");
+	
+	//이벤트 호출
+	btn.addEventListener("click",toggleMusic, false);
+	btn2.addEventListener("click",init, false);
+	btn3.addEventListener("click",gonext, false);
+	
+	m.addEventListener("timeupdate",show,false);
+	
+	sel=document.getElementById("sel");
+	m.src="../media/"+sel.value;	
+	song.innerHTML=sel.value;
+	
+	//음악송 변경
+	sel.onchange=function(){
+		m.src="../media/"+this.value;	
+		song.innerHTML=this.value;
+		btn.click();
+	}
+}
+
+//사용자함수들 추가
+function toggleMusic(){
+	if(m.paused){
+		m.play();
+		btn.innerHTML="일시정지";
+	}else{
+		m.pause();
+		btn.innerHTML="음악재생";
+	}
+}
+
+function init(){
+	m.currentTime=0;
+}
+
+function gonext(){
+	m.currentTime+=2;
+}
+
+function show(){
+	//이 부분을 몇분:몇초 형식으로 출력하기
+	//document.getElementById("t").innerHTML=this.currentTime;
+	var tot=parseInt(this.currentTime);
+	//console.log(tot);
+	var h=parseInt(tot/60);
+	var m=tot%60;
+	//console.log(h+","+m);
+	var s=(h<10?"0":"")+h+":"+(m<10?"0":"")+m;
+	//총 play 시간
+	var duration=parseInt(this.duration);
+	if(!isNaN(duration)){		
+		console.log(this.duration);
+		var h2=parseInt(duration/60);
+		var m2=duration%60;
+		//console.log(h+","+m);
+		s+="(총시간:"+(h2<10?"0":"")+h2+":"+(m2<10?"0":"")+m2+")";
+	}
+	//현재 재생시간옆에 추가 (총시간(예) 03:12)
+	document.getElementById("t").innerHTML=s;	
+}
+
+</script>
+</head>
+<body>
+<h2 id="song"></h2>
+<audio src="" id="mymusic"
+controls="controls"></audio>
+<br>
+<button id="btn">음악재생</button>
+<button id="btn2">|&lt;</button>
+<button id="btn3">&gt;&gt;</button>
+<div id="t" style="font-size: 20px">00:00</div>
+
+<div id="songlist">
+	<select id="sel" size="10">
+		<option selected="selected">001-박효신-야생화.mp3</option>
+		<option>01-서영은-꽃이 진다 (후궁 제왕의 첩 ver.).mp3</option>
+		<option>005-임창정-흔한 노래.mp3</option>
+		<option>08. 버스커 버스커 - 동경소녀.mp3</option>
+		<option>011-백지영-총맞은것처럼 (1).mp3</option>
+		<option>022-린-보고 싶어...운다.mp3</option>
+		<option>027-에일리-노래가 늘었어.mp3</option>
+		<option>045. 임창정 - 그때 또 다시(again).mp3</option>
+		<option>085-휘성-결혼까지 생각했어.mp3</option>
+	</select>
+</div>
+</body>
+</html>
+
+
+
+
+
+

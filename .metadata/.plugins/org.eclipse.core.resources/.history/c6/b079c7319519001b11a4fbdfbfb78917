@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	div.log{
+		text-align: center;
+		margin-top: 100px;
+		margin-left: 100px;
+		width: 500px;
+	}
+	
+	h1{
+		margin-top: 0px;
+		background-color: rgb(3, 215, 201);
+		height: 70px;
+	}
+	
+	#email{
+		margin-top: 20px;
+	}
+	
+	input.form-control{
+		width: 300px;
+		position: relative;
+		left: 100px;
+	}
+	
+	button{
+		width: 100px;
+		height: 40px;
+		background-color: rgb(3, 215, 201);
+	}
+	
+	#alert{
+		height: 40px;
+		width: 300px;
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	$('#frm').submit(function(e){
+		e.preventDefault();
+		var email = $("#email").text();
+		var pwd = $("#pwd").text();
+		console.log(email);
+		console.log(pwd);
+		
+		localStorage["email"] = email;
+		localStorage["pwd"] = pwd;
+		
+		if(email != 'kdkg0434@gmail.com'){
+			$("#alert").addClass("alert alert-danger");
+			var s = "<b>이메일 오류</b>";
+			$("#alert").html(s);
+			
+		}else if(pwd != 'a1234'){
+			$("#alert").addClass("alert alert-danger");
+			var s = "<b>비밀번호 오류</b>";
+			$('#alert').html(s);
+			alert(s);
+		}else if(email == 'kdkg0434@gmail.com' && pwd == 'a1234'){
+			location.href = 'note.html';
+		}
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class='log'>
+	<form id='frm'>
+		<h1>Login</h1>
+		<input type='text' id='email' class="form-control" required="required" placeholder="Enter email"><br>
+		<input type='password' id='pwd' class="form-control" required="required" placeholder="Enter password"><br>
+		<div id='alert'></div>
+		<button type='submit' id='btn' class='btn-block'>Log in</button>
+	</form>
+</div>
+</body>
+</html>

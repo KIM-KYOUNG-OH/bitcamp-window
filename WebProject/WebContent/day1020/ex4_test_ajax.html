@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	table{
+		border: 2px inset gray;
+	}
+	
+	table tr, table th, table td{
+		border-bottom: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+</style>
+<script type="text/javascript">
+	//서버와 데이터 통신을 하기위한 변수 선언
+	var xhr;
+	
+	window.onload=function(){
+		if(window.XMLHttpRequest){
+			xhr=new XMLHttpRequest();
+			//alert('크롬,ie')
+		}else{
+			alert('Ajax를 지원하지 않는 브라우저입니다');
+		}
+		document.getElementById('btn1').onclick=function(){
+			// method방식, 파일명, 비동기방식(true)
+			xhr.open('get','ex4_test_xml.xml',true);
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4){
+					if(xhr.status==200){
+						//alert('성공\n'+xhr.responseText);
+						// 하지만 xml데이터 형태로 받아야 분석이 가능하다
+						var data=xhr.responseXML;
+						// item 단위로 데이터 가져오기
+						var itemNode=data.getElementsByTagName('item');
+						//item 갯수 확인하기
+						//alert(itemNode.length);
+						var codeNode = data.getElementsByTagName("code");
+						var sangNode = data.getElementsByTagName('sang');
+						
+						var s = '<table><caption>xml 읽기</caption>';
+						s+="<tr bgcolor='orange'>";
+						s+= "<th width='100'>code</th>";
+						s+= "<th width='200'>sang</th>";
+						s+= "</tr>";
+						for(i=0;i<itemNode.length; i++){
+							s+= "<tr>";
+							s+= "<td>"+codeNode[i].childNodes[0].nodeValue+"</td>";
+							s+= "<td>"+sangNode[i].childNodes[0].nodeValue+"</td>";
+							s+= "</tr>";
+						}
+						s+="</table>";
+						document.getElementById("out1").innerHTML=s;
+					}else{
+						alert("error:"+xhr.status);
+					}
+				}
+			}
+			xhr.send(null);
+		}
+		
+		document.getElementById('btn2').onclick=function(){
+			//json파일 open
+			xhr.open("get", "ex4_test_json.json", true);
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState == 4){
+					if(xhr.status==200){
+						//alert('성공');
+						jsonwrite();
+					}else{
+						alert("error:"+xhr.status);
+					}
+				}
+			}
+			xhr.send(null);
+		}
+		
+	}
+	function jsonwrite(){
+		var data=xhr.responseText;
+		var s = '<table><caption>Json 읽기</caption>';
+		s+="<tr bgcolor='orange'>";
+		s+= "<th width='100'>사번</th>";
+		s+= "<th width='100'>이름</th>";
+		s+= "<th width='150'>주소</th>";
+		s+= "</tr>";
+		//데이터 출력
+		// Json.stringify: 객체를 json타입의 문자열로 변환시켜주는 함수
+		// Json.parse:json 데이터를 객체로 변환시켜주는 함수
+		
+		// json 데이터 분리
+		var parseData=JSON.parse(data);
+		for(i=0; i<parseData.jikwon.length; i++){
+			s += "<tr>";
+			s += "<td>" + parseData.jikwon[i].sabun + "</td>";
+			s += "<td>" + parseData.jikwon[i].irum + "</td>";
+			s += "<td>" + parseData.jikwon[i].juso + "</td>";
+			s += "</tr>";
+		}
+		s+="</table>";
+		document.getElementById("out2").innerHTML=s;
+	}
+</script>
+</head>
+<body>
+<h2>순수자바스크립트로 XML과 JSON 데이터 처리하기</h2>
+<button type='button' id='btn1'>XML 데이터 읽기</button>
+<h3>XML 읽은 결과</h3>
+<div id='out1'></div>
+<hr>
+<button type='button' id='btn2'>JSON데이터 읽기</button>
+<h3>JSON 읽은 결과</h3>
+<div id='out2'></div>
+</body>
+</html>

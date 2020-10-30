@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+<style type="text/css">
+	div.boards{
+		float: left;
+		margin: 30px;
+		border: 1px solid gray;
+		box-shadow: 10px 10px 10px grey;
+		width: 200px;
+	}
+	
+	.board_title{
+		display: none;
+	}
+	
+	.icon{
+		text-align: right;
+	}
+	
+	.add_data:hover{
+		cursor: pointer;
+		font-weight: bold;
+		color: green;
+	}
+	
+	#dialog-form{
+		background-color: black;
+		z-index: 9;
+	}
+	
+	#dialog-form>form{
+		position: absolute;
+		left: 100px;
+		top: 100px;
+		width: 300px;
+		height: 700px;
+		border: 1px solid black;
+		background-color: white;
+		z-index: 10;
+		padding: 10px;
+	}
+	
+	
+</style>
+</head>
+<script type="text/javascript">
+$(function(){
+	$("#dialog-form").hide();
+	showDatas();
+	
+	$("#create_data").click(function(){
+		$("#dialog-form").show();
+	});
+	
+	// 노트 추가
+	$("#btnadd").click(function(){
+		var title = $("#title").val();
+		var description = $("#description").val();
+		var commention = $("#comment").text();
+		var image = $("#image").val();
+		var dueDate = $("#dueDate").val();
+		$.ajax({
+			type:'get',
+			url:'./insertdata.jsp',
+			datatype:'html',
+			data:{"title":title,"description":description,"commention":commention,
+				"image":image,"dueDate":dueDate},
+			success:function(data){
+				
+				showDatas();
+				$("#title").val('');
+				$("#description").val('');
+				$("#comment").val('');
+				$("#image").val('');
+				$("#dueDate").val('');
+				$("#dialog-form").hide();
+			}
+		});
+	});
+});
+
+function showDatas(){
+	$.ajax({
+		type: 'post',
+		url: "./showdatas.jsp",
+		dataType:'json',
+		success:function(data){
+			var s = "<ol>";
+			$(data).each(function(i, elt) {
+				var n = $(elt);
+				alert(data);
+				s += "<li>"+elt[i]+"</li>";
+				
+				s += "<hr>";
+			});
+			
+			s += "</ol>";
+			$("#datas").html(s);
+		}
+	});
+}
+
+</script>
+<body>
+<div id="dialog-form">
+  <form>
+	<fieldset>
+	<h4 style='text-align: center;'><b>노트 추가</b></h4><br>
+		<label>title</label><br>
+		<input type="text" id="title" required="required"><br>
+		<label>description</label><br>
+		<textarea id="description" rows='8' cols='35'></textarea><br>
+		<label>commention</label><br>
+		<input type="text" id="input_comment"><br>
+		<div id="comment">대화</div><br>
+		<label>image</label>
+		<input type="file" id="image"><br>
+		<label>dueDate</label>
+		<input type="date" id="dueDate"><br>
+		<button id="btnadd" type="submit" class="btn btn-success">노트 추가</button>&nbsp;
+		<button id="btncancel" class="btn btn-danger">cancel</button>
+	</fieldset>
+  </form>
+</div>
+
+<div id='head'></div>
+	<span class="glyphicon glyphicon-home"></span>&nbsp;
+	<select>
+		<option>Boards</option>
+		<option>Calendar</option>
+	</select>
+	<span id='user'>user</span>
+	<span>logout</span>
+	<hr>
+<div id='body'></div>
+	<div class='boards'><input type="text" class='board_title'><span>To Do</span><br>
+	<div class='icon'>
+		<span class="glyphicon glyphicon-pencil"></span>&nbsp;
+		<span class="add_data glyphicon glyphicon-plus" id='create_data'></span>&nbsp;
+	</div><hr>
+	<div id='datas'></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class='boards'><input type="text" class='board_title'><span>Doing</span><br>
+	<div class='icon'>
+		<span class="glyphicon glyphicon-pencil"></span>&nbsp;
+		<span class="glyphicon glyphicon-plus"></span>&nbsp;
+	</div>
+	<hr></div>
+	<div class='boards'><input type="text" class='board_title'><span>Done</span><br>
+	<div class='icon'>
+		<span class="glyphicon glyphicon-pencil"></span>&nbsp;
+		<span class="glyphicon glyphicon-plus"></span>&nbsp;
+	</div><hr>
+	<div></div>
+</div>
+<div class='boards'>Add Board</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	div{position: absolute; border: 1px solid gray; 
+		width: 300px; height: 150px; font-size: 19px;}
+	#one{left: 50px; top: 100px;}
+	#two{left: 380px; top: 100px;}
+	#three{left: 710px; top: 100px;}
+	#result{
+		left: 100px;
+		top: 400px;
+		font-size: 2em;
+		text-align: center;
+		line-height: 150px;
+		width: 600px;
+	}
+	#three h3:hover{
+		cursor: pointer;
+		background-color: orange;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		var b = '<button type="button" id="btn1">영화 예매</button>';
+		$('#one').append(b);
+		
+		$('#btn1').click(function(){
+			var b = '<button type="button" id="btn2">극장 선택</button>';
+			b+='&nbsp;<button type="button" id="btn3">영화 선택</button>'
+			$('#two').empty(); // 태그안의 값들 모두 지우기
+			$('#two').append(b); // 추가
+		});
+		
+		// 아래코드는 안됨: 미래에 추가되는 태그에 대해서는 이벤트가 안됨
+		// on사용 (live는 1.8에서 deprecate됨)
+		/*$('#btn2').click(function(){
+			var s = "<h3>CGV 강남점</h3>";
+			s+="<h3>MEGABOX 강남점</h3>";
+			s+="<h3>CGV 교보타워점</h3>";
+			$("#three").empty();
+			$('#three').append(s);
+		});*/
+		
+		$(document).on('click','#btn2',function(){
+			var s = "<h3>CGV 강남점</h3>";
+			s+="<h3>MEGABOX 강남점</h3>";
+			s+="<h3>CGV 교보타워점</h3>";
+			$("#three").empty();
+			$('#three').append(s);
+		});
+		
+		$(document).on('click','#btn3',function(){
+			var s = "<h3>바람과 함께 사라지다</h3>";
+			s+="<h3>엑시트</h3>";
+			s+="<h3>괴물</h3>";
+			$("#three").empty();
+			$('#three').append(s);
+		});
+		
+		$(document).on('click','#three h3',function(){
+			var data = $(this).text();
+			$('#result').text(data);
+		});
+		
+	});
+</script>
+</head>
+<body>
+<div id='one'></div>
+<div id='two'></div>
+<div id='three'></div>
+<div id='result'></div>
+</body>
+</html>

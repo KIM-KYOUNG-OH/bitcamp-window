@@ -1,0 +1,16 @@
+<%@page import="ajax.sawon.db.SawonDao"%>
+<%@page import="ajax.sawon.db.SawonDto"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String num = request.getParameter("num")
+String name = request.getParameter("name");
+String driver = request.getParameter("driver");
+String gender = request.getParameter("gender");
+String address = request.getParameter("address");
+String birthday = request.getParameter("birthday");
+
+SawonDao dao = new SawonDao();
+SawonDto dto = dao.updateSawon(dto)
+
+%>

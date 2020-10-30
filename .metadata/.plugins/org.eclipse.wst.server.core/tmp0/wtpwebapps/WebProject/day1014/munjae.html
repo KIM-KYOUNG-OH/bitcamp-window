@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<script type="text/javascript">
+	var arr = ['ani01.gif','ani02.gif','ani09.gif','ani10.gif','01.png'];
+	//div의 속성 변경(크기,테두리선,마진.. 알아서)
+	$('div').css({
+		'width':'120px',
+		'height':'120px',
+		'margin':'20px',
+		'border':'1px solid gray',
+		'float':'left',
+		'background-repeat':'no-repeat',
+		'background-size':'100px 100px'
+	});
+	//each문으로 div의 배경 이미지를 넣으세요(배열의 이미지로)
+	$('div').each(function(index){
+		$(this).css({
+			'background-image':'url("../image2/'+arr[index]+'")'
+		});
+	});
+	// div를 클릭하면 border를 굴기 10의 굵은 선으로 변경
+	$('div').click(function(){
+		// 선택안한건 원래 border로 주기
+		$('div').css({
+			'border':'1px solid gray'
+		})
+		
+		$(this).css({
+			'border':'3px inset black'
+		});
+	});
+</script>
+</body>
+</html>

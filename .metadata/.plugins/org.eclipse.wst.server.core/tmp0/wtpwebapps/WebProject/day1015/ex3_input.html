@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<form action="#">
+	<label for="user">이름</label>
+	<input type="text" id="user" value="홍길동"><br>
+	<label for="pass">비밀번호</label>
+	<input type="password" id="pass" value="1234"><br>
+</form>
+<script type="text/javascript">
+	//$("input").css("background","#ddd");
+	$("input:password").css({
+		"background":"#ffffcc"
+	});
+	$("input:text").css("color",'blue');
+	
+	// input 이벤트
+	$("input").focus(function(){
+		$(this).css("background-color","pink");
+	});
+	$("input").blur(function(){
+		$(this).css('background-color','white');
+	});
+</script>
+</body>
+</html>

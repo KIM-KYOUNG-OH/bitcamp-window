@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	table{
+		border: 2px inset gray;
+	}
+	
+	table tr, table th, table td{
+		border-bottom: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+</style>
+</head>
+<body>
+	<h2>변경하고 싶은 글자색을 선택해주세요</h2>
+	<input type='radio' name='fcolor' value='black' checked='checked'>검정색
+	<input type='radio' name='fcolor' value='blue'>파랑색
+	<input type='radio' name='fcolor' value='red'>빨강색
+	<input type='radio' name='fcolor' value='green'>초록색
+	<input type='radio' name='fcolor' value='pink'>분홍색
+	<h2>변경하고 싶은 배경색을 선택해주세요</h2>
+	<input type='color' id="bcolor" value='#ffffff'>
+	<h2>운전면허가 있으면 체크해주세요</h2>
+	운전면허 : <input type="checkbox" id='lic'>
+	<h2>이미지를 선택하세요</h2>
+	<input type='file' id='myfile'>
+	<input type='file' onchange='readUrl(this)'>
+	<!-- 이미지 출력할곳 -->
+	<img id='showimg' style='position: absolute; left: 600px; top: 50px; max-width: 300px;'>
+<hr>
+<h1>Have a Nice Day!!!</h1>
+<h3>운전면허가 없습니다</h3>
+<script type="text/javascript">
+	$('input[name="fcolor"]').click(function(){
+		var fcolor = $(this).val();
+		$("h1").css('color',fcolor);
+	});
+	
+	$("#bcolor").change(function(){
+		$('h1').css('background-color',$(this).val());
+	});
+	
+	$('#lic').click(function(){
+		if($(this).is(':checked')){
+			$('h3').text("운전면허가 있습니다");
+		}
+	});
+	
+	// 방법1
+	$('#myfile').change(function(){
+		if($(this)[0].files[0]){
+			var reader=new FileReader();
+			reader.onload=function(e){
+				$('#showimg').attr('src',e.target.result);
+			}
+			reader.readAsDataURL($(this)[0].files[0]);
+		}
+	});
+	
+	// 방법2
+	function readUrl(input){
+		if(input.files[0]){
+			var reader=new FileReader();
+			reader.onload=function(e){
+				$('#showimg').attr('src',e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<%@page import="java.util.ArrayList"%>
+<%@page import="ajax.sawon.db.SawonDao"%>
+<%@ page language="java" contentType="text/xml; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% 
+	SawonDao dao = new SawonDao();
+	ArrayList<SawonDto> list = dao.getSawonList();
+%>
+<list>
+<% 
+
+%>
+</list>

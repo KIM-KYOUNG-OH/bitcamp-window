@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/*해당 이미지가 영역안에서 x,y방향으로 반복출력*/
+	#one{
+		width: 300px;
+		height: 300px;
+		border: 1px solid gray;
+		background-image: url("../image/c5.png");
+		background-size: 50px 60px;
+	}
+	
+	#two{
+		width: 300px;
+		height: 300px;
+		border: 1px solid red;
+		background-image: url("../image/c2.png");
+		background-size: 100px 120px;
+		background-repeat: no-repeat;/*반복안함*/
+		background-position: right bottom;
+		text-align: center;/*수평방향의 정중앙*/
+		line-height: 300px;/*행높이를 div높이와 같게하면 세로방향의 정중앙에 온다*/
+		font-weight: bold;/*굵게 속성*/
+		font-size: 3em;		
+	}
+</style>
+</head>
+<body>
+<div id="one"></div>
+<div id="two">Hello!!</div>
+
+</body>
+</html>

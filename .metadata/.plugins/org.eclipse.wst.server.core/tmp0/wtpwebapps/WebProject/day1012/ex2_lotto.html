@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div>div{
+		border: 1px solid gray;
+		width: 70px;
+		height: 70px;
+		text-align: center;
+		line-height: 70px;
+		font-size: 3em;
+		font-weight: bold;
+		margin-right: 20px;
+		border-radius: 100px;
+	}
+	
+	#one{background-color: pink;}
+	#two{background-color: #add8e6;}
+	#three{background-color: #98fb98;}
+	#four{background-color: #ffd700;}
+	#five{background-color: #8fbc8f;}
+	#six{background-color: #c71585;}
+	div{
+		float: left;
+	}
+	
+	#btnstart,#btnstop{
+		width: 70px;
+		height: 70px;
+		border: 1px solid gray;
+		text-align: center;
+		line-height: 70px;
+		font-size: 17px;
+		font-weight: bold;
+	}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("btnstart").onclick=function(){
+		var lotto=new Array(6);
+		interval=setInterval(function() {
+			for(i=0;i<lotto.length;i++){
+				lotto[i]=parseInt(Math.random()*45)+1;//1~45까지 난수구하기
+				for(j=0;j<i;j++){
+					if(lotto[j]==lotto[i]){//이전 배열번지에 같은숫자가 있으면 다시 구한다
+						i--;
+						break;
+					}
+				}
+			}
+			/* for(i=0;i<lotto.length;i++){
+				console.log(lotto[i]);
+			} */
+			
+			one.innerText=lotto[0];
+			two.innerText=lotto[1];
+			three.innerText=lotto[2];
+			four.innerText=lotto[3];
+			five.innerText=lotto[4];
+			six.innerText=lotto[5];
+			
+		},500);
+	}
+	
+	document.getElementById("btnstop").onclick=function(){
+		clearInterval(interval);
+	}
+}
+</script>
+</head>
+<body>
+<div>
+	<div id="one">1</div>
+	<div id="two">1</div>
+	<div id="three">1</div>
+	<div id="four">1</div>
+	<div id="five">1</div>
+	<div id="six">1</div>	
+</div>
+<button type="button" id="btnstart">시작</button>
+<button type="button" id="btnstop">멈춤</button>
+
+</body>
+</html>

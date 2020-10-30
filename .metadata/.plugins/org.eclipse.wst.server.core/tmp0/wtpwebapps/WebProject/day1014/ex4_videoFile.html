@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+window.onload=function(){
+	document.getElementById("file").onchange=function(e){
+		//alert(this.files[0].name);
+		//alert(e.target.files[0].name);
+		var file = e.target.files[0];
+		// 자바스크립트 정규표현식
+		if(!file.type.match(/^video\/mp4$/)){
+			document.getElementById("filename").innerHTML=
+				"<b style='color:red'>mp4파일을 선택해주세요</b>";
+		}else{
+			document.getElementById("filename").innerHTML=
+				"<b>"+e.target.files[0].name+"</b>";
+		}
+		
+		// 동영상 가져오기
+		var reader = new FileReader();
+		// data url 형식으로 파일 데이터 읽기
+		reader.readAsDataURL(file);
+		// 파일읽기의 진행상황
+		var s = document.getElementById('state');
+		var h = window.setInterval(function(){
+			if(reader.readyState == reader.EMPTY){
+				s.textContent="대기중";
+			}else if(reader.readyState == reader.LOADING){
+				s.textContent="로드중";
+			}else if(reader.readyState == reader.DONE){
+				s.textContent="완료";
+				//VIDEO요소의 src지정
+				var v = document.getElementById('v');
+				v.src = reader.result;
+				v.load();
+				// 타이머 해제
+				clearInterval(h);
+			}
+		}, 100);
+		
+	}
+}
+</script>
+</head>
+<body>
+	<input type="file" id='file'>
+	<hr>
+	<span id="state" style='font-size: 2em;'>대기중</span>
+	<hr>
+	<div id='filename'></div>
+	<video id='v' width='400' height='300' controls='controls'></video>
+</body>
+</html>

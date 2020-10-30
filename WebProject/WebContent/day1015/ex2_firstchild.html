@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<p>오늘 쇼핑할 물건</p>
+<ol>
+	<li>양말</li>
+	<li>라면</li>
+	<li>가방</li>
+	<li>꽃</li>
+</ol>
+<p>먹고싶은 음식</p>
+<ol>
+	<li>스파게티</li>
+	<li>라면</li>
+	<li>떡볶이</li>
+	<li>카레라이스</li>
+</ol>
+<script type="text/javascript">
+// li 그룹이 여럿이라 하더라도 무조건 첫번째 li에만 적용
+	$("li:first").css("font-size","1.5em");
+	//first-child : 부모를 기준으로 첫번째 자식에게 적용
+	$("li:first-child").css("background-color","pink");
+</script>
+<hr>
+<p>일반적인 문단입니다</p>
+<p>문단안에 <span>span</span>태그가 있습니다</p>
+<p>이제 가을인가봐요 추워지네요</p>
+<script type="text/javascript">
+	//has(t): t라는 태그를 포함하고 있으면 적용시켜라
+	// 아래코드: p태그중 span태그를 포함하고 있는 경우에만 배경색을 노랑색으로 변경해라
+	$("p:has(span)").css("background-color","yellow");
+	//contains(s): s문자열을 포함하고 있으면 스타일 적용
+	//P태그중 '가을'이라는 문자열을 포함하고 있는 곳의 스타일 적용
+	$("p:contains(가을)").css("color","magenta");
+</script>
+</body>
+</html>

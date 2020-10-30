@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=function(){
+	//캔바스에 그림을 그리기 위한 기본 작업
+	var can=document.getElementById("can1");
+	var ct=can.getContext("2d");
+	
+	//선그리기
+	ct.lineWidth=5;//선굵기
+	ct.strokeStyle="red";//선색상
+	ct.beginPath();
+	ct.moveTo(100, 10);//이동
+	ct.lineTo(10, 100);
+	ct.lineTo(190, 100);
+	ct.lineTo(100, 10);
+	ct.stroke();//선을 그린다
+	ct.closePath();
+	
+	//사각형 그리기
+	ct.lineWidth=2;//선굵기
+	ct.strokeStyle="magenta";//선색상
+	ct.fillStyle="yellow";//채우기 색상
+	ct.strokeRect(10, 110, 70, 70);
+	ct.fillRect(100, 110, 130, 70);//채워진 사각형
+	
+	//글자에 그림자
+	ct.shadowOffsetX=5;
+	ct.shadowOffsetY=5;
+	ct.shadowBlur=10;
+	ct.shadowColor='green';
+	
+	ct.fillStyle="blue";
+	ct.font="13px Comic Sans MS";
+	ct.fillText("Happy",130,130);//글자 출력
+	
+}
+</script>
+</head>
+<body>
+<h2>Canvas 에 그림을 그리는 방법</h2>
+<canvas id="can1" width="300" height="300" style="border: 1px solid gray;">
+	<img src="../image2/ani12.gif"><!-- 캔바스를 지원하지 않는 브라우저일경우 이미지 출력 -->
+</canvas>
+</body>
+</html>

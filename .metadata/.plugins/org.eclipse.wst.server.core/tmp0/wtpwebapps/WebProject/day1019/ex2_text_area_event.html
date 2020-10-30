@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<b>하고싶은쓰기(글자 제한 80)</b>
+<br><br>
+<textarea rows="" cols="" style='width: 250px; height: 100px;' id= "content"></textarea>
+<br>
+<span id='remain'>80</span>글자남음
+<script type="text/javascript">
+	$('#content').keyup(function(){
+		// 입력한 글자의 길이
+		var len=$(this).val().length;
+		// 남은 글자수 표시
+		var remain = 80-len;
+		// remain이 0이하가 되면 포커스를 벗어나게하기
+		if(remain<=0){
+			$(this).blur();
+			// 80글자만 남기고 나머지 삭제
+			$('#content').val($(this).val().substring(0,80));
+			remain=0;
+		}
+		// remain을 span태그에 표시하기
+		$('#remain').text(remain);
+	});
+</script>
+</body>
+</html>

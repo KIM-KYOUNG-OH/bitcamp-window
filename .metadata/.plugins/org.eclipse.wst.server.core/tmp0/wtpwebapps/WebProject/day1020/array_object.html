@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	#addform,#writedata{
+		position: absolute;
+		left: 50px;
+		top: 60px;
+		width: 600px;
+		height: 500px;
+		border: 1px solid black;
+		font-size: 12px;
+	}
+	
+	table{
+		border: 2px inset gray;
+	}
+	
+	table tr, table th, table td{
+		border-bottom: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	arr= new Array();
+	
+	$('#writedata').hide();
+	$('#addform').show();
+	
+	$('#btnadd').click(function(){
+		$('#writedata').hide();
+		$('#addform').show();
+	});
+	
+	$('#btnshow').click(function(){
+		//arr 갯수만큼 반복
+		var s = '<table><caption><b>전체 데이터 출력</b></caption>';
+		s+="<tr bgcolor='pink'><th width='100'>번호</th><th width='100'>이름</th>";
+		s+="<th width='100'>나이</th><th width='200'>주소</th></tr>";
+		$.each(arr, function(index, item){
+			s += '<tr>';
+			s += '<td align="center">'+(index+1)+"</td>";
+			s += '<td align="center">'+item.name+"</td>";
+			s += '<td align="center">'+item.age+"</td>";
+			s += "<td>" + item.addr+ "</td>";
+			s += "</tr>";
+		});
+		s+='</table>';
+		$('#writedata').html(s);
+		$('#writedata').show();
+		$('#addform').hide();
+	});
+	
+	$('#btnsave').click(function(){
+		var obj=new Object();
+		obj.name=$('#txtname').val();
+		obj.age=$('#txtage').val();
+		obj.addr=$('#txtaddr').val();
+		arr.push(obj);
+		alert(arr.length+'명째 추가!!');
+		// 입력값 지우기
+		$('#txtname').val('');
+		$('#txtage').val('');
+		$('#txtaddr').val('');
+		$('#txtname').focus();
+		
+	});
+});
+</script>
+</head>
+<body>
+<button type='button' id='btnadd'>데이터추가</button>
+<button type='button' id='btnshow'>전체데이터출력</button>
+<div id='addform'>
+	<table>
+		<caption><b>입력폼</b></caption>
+		<tr>
+			<th width='100' bgcolor='orange'>이름</th>
+			<td width='200'>
+				<input type='text' id='txtname' style='width: 100px;' placeholder='input name'>
+			</td> 
+		</tr>
+		<tr>
+			<th width='100' bgcolor='orange'>나이</th>
+			<td width='200'>
+				<input type='text' id='txtage' style='width: 100px;' placeholder='input age'>
+			</td> 
+		</tr>
+		<tr>
+			<th width='100' bgcolor='orange'>주소</th>
+			<td width='200'>
+				<input type='text' id='txtaddr' style='width: 150px;' placeholder='input addr'>
+			</td> 
+		</tr>
+		<tr>
+			<td colspan='2' align='center'>
+				<button type='button' id='btnsave'>데이터저장</button>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id='writedata'>출력</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

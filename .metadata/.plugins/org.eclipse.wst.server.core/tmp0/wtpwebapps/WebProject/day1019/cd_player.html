@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+	body,ul,h1,h2{
+		margin:0; padding:0;
+	}
+	
+	body{
+		background-image: url("../image2/bg2.png");
+		background-position: top;
+		font-family: 'Indie Flower', cursive;
+		font-weight: bold;
+	}
+	
+	li{
+		list-style: none;
+	}
+	
+	.album{
+		overflow: hidden;
+		width: 1100px; height: 600px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -550px;
+		margin-top: -300px;
+	}
+	
+	.album .cover{
+		float: left;
+		position: relative;
+		z-index: 10;
+	}
+	
+	#cd{
+		float: left;
+		width: 300px;
+		height: 500px;
+		position: relative;
+		left: -60px;
+		top: 45px;
+		background-image: url('../image2/cd-sprite.png');
+		background-position: right top;
+	}
+	
+	#cd.music1{background-position: right top;}
+	#cd.music2{background-position: right center;}
+	#cd.music3{background-position: right bottom;}
+	
+	.select-music{
+		cursor: pointer;
+		width: 540px;
+		position: absolute;
+		left: 110px;
+		top: 50px;
+		z-index: 100;
+	}
+	
+	.select-music h1.title{
+		background-color: #fff;
+		background-image: url('../image2/play.png');
+		background-repeat: no-repeat;
+		height: 40px;
+		line-height: 40px;
+		color: #f60;
+		text-indent: 45px;
+		font-size: 25px;
+	}
+	
+	.select-music .music-list li{
+		height: 40px;
+		line-height: 40px;
+		color: #666;
+		text-indent: 15px;
+		font-size: 20px;
+		background-color: rgba(0,0,0,0.7);
+	}
+	
+	.select-music .music-list li:hover{
+		background-color: #f60;
+		color: #fff;
+	}
+	
+	.select-music .music-list{
+		display: none;
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	// Now Playing부분 누르면 노래 목록 나타나게 하기
+	$('h1.title').click(function(){
+		$('ul.music-list').slideDown('slow');
+	});
+	// 노래 제목 클릭 이벤트
+	$('ul.music-list li').click(function(){
+		// 클릭한곳의 노래 제목 얻기 변수명: title
+		var title = $(this).text();
+		// title값을 h1.title에 넣어주기
+		$('h1.title').text(title);
+		// class 이름 얻기(변수명 : classname)
+		var classname = $(this).attr('class');
+		// cd change하기
+		$('#cd').animate({'width':0},'slow',function(){
+			// 현재 cd가 사라진후 새로운 cd교체
+			$('#cd').attr('class', classname);
+			$(this).animate({'width':'300px'},'slow')
+		});
+		// 노래 메뉴목록 다시 사라지게하기(slideUp)
+		$('ul.music-list').slideUp('fast');
+	});
+});
+</script>
+</head>
+<body>
+<div class='album'>
+	<div class='select-music'>
+		<h1 class='title'>Now playing</h1>
+		<ul class='music-list'>
+			<li class='music1'>Lost Stars</li>
+			<li class='music2'>A Higher Place</li>
+			<li class='music3'>Like A Fool</li>
+		</ul>
+	</div>
+	<img alt="" src="../image2/cover.png" class='cover'>
+	<div id='cd'></div>
+</div>
+</body>
+</html>

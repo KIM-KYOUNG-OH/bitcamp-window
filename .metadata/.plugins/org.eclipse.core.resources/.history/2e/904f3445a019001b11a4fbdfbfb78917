@@ -1,0 +1,40 @@
+package ajax.note.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import oracle.db.OracleConnect;
+
+public class NoteDao {
+	OracleConnect db;
+	public NoteDao(){
+		db = OracleConnect.getInstance();
+	}
+	
+	// insert
+	public void addData(NoteDto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into note values (seq_note.nextval,?,?,?,?,?)";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			System.out.println("sql오류 :" +e.getMessage());
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	// select
+	
+	
+	// update
+	
+	
+	// delete
+	
+	
+	
+}

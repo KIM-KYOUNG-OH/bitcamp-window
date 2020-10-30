@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+
+	#bird{ 
+		position: absolute;
+		left: 100px;
+		top: 200px;
+		width: 100px;
+		z-index: 1;
+	}
+	
+	#wall{
+		position: absolute;
+		left: 150px;
+		top: 120px;
+		z-index: 2;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$('#bird').click(function(){
+			$('#bird').animate({left:'0px'}, 1000)
+			
+			setTimeout(function(){
+				$('#bird').css('z-index','2');
+				$('#wall').css('z-index','1');
+			}, 1000);
+			
+		});
+		$('#wall').click(function(){
+			$('#bird').animate({left:'100px'}, 1000)
+			
+			$('#bird').css('z-index','1');
+			$('#wall').css('z-index','2');
+			
+		});
+	});
+</script>
+</head>
+<body>
+<div>
+	<img id='bird' alt="" src="../image2/chick.gif">
+	<img id='wall' alt="" src="../image2/b02.png">
+</div>
+</body>
+</html>

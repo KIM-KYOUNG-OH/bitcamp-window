@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<h1>제이쿼리</h1>
+<h3>1장. selector 공부하기</h3>
+<ul>
+	<li>class</li>
+	<li>id</li>
+</ul>
+<h3>이벤트 공부하기</h3>
+<ul>
+	<li class='select'>click</li>
+	<li>bind</li>
+</ul>
+<script type="text/javascript">
+	// 전체 태그중 h1~h6의 해더 태그에만 적용
+	$('*:header').css('border','3px inset orange')
+	// li 태그중 class명이 select인 경우
+	$('li.select').css({
+		'color':'red',
+		'font-weight':'bold'
+	});
+	$('li:not(.select)').css('background-color','#ffddff');
+</script>
+</body>
+</html>

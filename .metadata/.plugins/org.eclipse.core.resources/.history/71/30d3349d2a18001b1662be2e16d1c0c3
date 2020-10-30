@@ -1,0 +1,10 @@
+<%@page import="ajax.sawon.db.SawonDto"%>
+<%@page import="ajax.sawon.db.SawonDao"%>
+<%@ page language="java" contentType="text/json; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% 
+	SawonDto dto = new SawonDto();
+	dto.
+	SawonDao dao = new SawonDao();
+	dao.insertSawon(dto);
+%>

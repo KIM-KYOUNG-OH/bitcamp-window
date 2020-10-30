@@ -1,0 +1,5 @@
+#Wed Oct 21 12:24:48 KST 2020
+org.eclipse.help.ui.localSearch.master=true
+org.eclipse.sdk.Google.master=true
+org.eclipse.sdk.Eclipse.master=true
+__DEFAULT__=true

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<span class='answer'>
+	<div>댓글1</div>
+		<ul>
+			<li>안녕</li>
+			<li>밥먹자</li>
+		</ul>
+		<br><br>
+</span>
+<span class='answer'>
+	<div>댓글2</div>
+		<ul>
+			<li>공부하자</li>
+			<li>머하니</li>
+		</ul>
+		<br><br>
+</span>
+<span class='answer'>
+	<div>댓글3</div>
+		<ul>
+			<li>제이쿼리</li>
+			<li>자바스크립트</li>
+		</ul>
+		<br><br>
+</span>
+<script type="text/javascript">
+	//댓글1,2,3만 남고 나머지는 모두 숨기기(hide()사용)
+	$('span.answer').find('ul').hide();
+	// 댓글 1,2,3 부분은 마우스 올리면 커서모양,굵게 속성으로 css 변경
+	
+	$('span.answer').css({
+		'cursor':'pointer',
+		'font-weight':'bold'
+	});
+	
+	// 댓글을 클릭하면 해당 댓글만 열리도록하기
+	$('span.answer').click(function(){
+		// 모든 댓글 숨기기
+		$('span.answer').find('ul').hide();
+		// 클릭한 현재 댓글만 보이게 하기
+		$(this).find('ul').show('1000');
+	});
+</script>
+</body>
+</html>

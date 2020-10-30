@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	var a="8";
+	var b="3"
+	document.write(a+b+"<br>");
+	document.write(parseInt(a)+parseInt(b)+"<br>");
+	document.write(eval(a)+eval(b)+"<br>");//숫자형태의 문자열을 숫자로 변환
+	document.write(eval("5+9")+"<br>");//문자열 형태의 수식이 있을경우 계산해서 결과 출력
+	document.write(eval("4.2-2.1")+"<br>");
+	
+	//isNaN : not a number :true:문자인경우,false:숫자인경우
+	document.write(isNaN("1")+"<br>");
+	document.write(isNaN("a")+"<br>");
+	document.write(isNaN("12a")+"<br>");
+</script>
+<hr>
+<h2>함수 isNaN 테스트 예제</h2>
+<input type="text" id="txt1">
+<button type="button" id="btn1">입력값 확인</button>
+<script type="text/javascript">
+	var txt1=document.getElementById("txt1");
+	document.getElementById("btn1").onclick=hello;
+	
+	
+	//입력후 엔터눌럿을때 같은 결과 발생
+	txt1.onkeyup=function(e){
+		//console.log(e.keyCode);//입력값 출력(대소문자주의)
+		//엔터를 누르면 결과 출력하기
+		if(e.keyCode==13){
+			hello();
+		}
+	}
+	
+	//일반 사용자 함수
+	function hello(){
+		if(isNaN(txt1.value)){
+			alert("입력값:"+txt1.value+" 는 문자입니다");
+		}else{
+			alert("입력값:"+txt1.value+" 는 숫자입니다");
+		}
+	}
+</script>
+<hr>
+<h2>eval 함수 테스트 예제</h2>
+<input type="text" id="su1" size="5" placeholder="숫자1">
+<input type="text" id="oper" size="5" placeholder="연산자">
+<input type="text" id="su2" size="5" placeholder="숫자2">
+<button type="button" id="btn2">연산 결과 확인</button>
+<div id="out" style="font-size: 2em"></div>
+<script type="text/javascript">
+	var su1=document.getElementById("su1");
+	var su2=document.getElementById("su2");
+	var op=document.getElementById("oper");
+	var out=document.getElementById("out");
+
+	document.getElementById("btn2").onclick=function(){
+		var result=eval(su1.value+op.value+su2.value);//예:"2*3"
+		//alert(result);
+		out.innerHTML=su1.value+op.value+su2.value+"="+result;
+	}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>오늘 날짜 : 
+	<script type="text/javascript">
+		//현재 날짜와 시간 얻기
+		var date=new Date();
+		var day=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+"<br>";
+		day+="현재 시간 : "+date.getHours()+":"+date.getMinutes();		
+		document.write(day);
+	</script>
+</h2>
+<script type="text/javascript">
+	for(var i=1;i<=10;i++){
+		document.write("<h3>"+i+"</h3>");
+	}
+</script>
+
+</body>
+</html>

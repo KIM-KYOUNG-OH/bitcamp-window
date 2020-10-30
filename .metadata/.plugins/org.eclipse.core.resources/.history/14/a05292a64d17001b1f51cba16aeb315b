@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<%@page import="oracle.db.OracleConnect"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/xml" charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% 
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String sql="select * from memo order by num asc";
+	OracleConnect db = OracleConnect.getInstance();
+	conn = db.getConnection();
+%>
+<list>
+<%
+	pstmt = conn.prepareStatement(sql);
+	try{
+		
+	}catch(SQLException e){
+		e.
+	}
+%>

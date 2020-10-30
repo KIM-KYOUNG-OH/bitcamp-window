@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<h1></h1>
+<script type="text/javascript">
+	// div에 랜덤하게 배경색 지정한후
+	// 해당 div를 클릭하면 배경색값을 얻어서 h1태그에 출력
+	// 모든 div에 대해서 너비, 높이, 테두리선, 커서 속성 주기
+	$('div').css({
+		'width':'70px',
+		'height':'70px',
+		'border':'3px inset gray',
+		'cursor':'pointer',
+		'float':'left',
+		'margin-right':'10px',
+		'font-size':'2em'
+	});
+	// 방법1 - for문으로 해보기
+	var d=$('div');
+	//alert(d.length);
+	/* for(i=0; i<d.length; i++){
+		var r = parseInt(Math.random()*256);
+		var g = parseInt(Math.random()*256);
+		var b = parseInt(Math.random()*256);
+		var color = 'rgb('+r+','+g+','+b+')';
+		$('div').eq(i).css('background-color',color);
+	} */
+	
+	// 방법2 - each문으로 해보기
+	$('div').each(function(index){ // index,item인데 생략가능
+		// index는 0부터 번호
+		// item은 해당 div 태그
+		// console.log(index);
+		var r = parseInt(Math.random()*256);
+		var g = parseInt(Math.random()*256);
+		var b = parseInt(Math.random()*256);
+		var color = 'rgb('+r+','+g+','+b+')';
+		$(this).css('background-color',color);
+		//해당 div 안에 index출력
+		//innerHTML -> html()
+		//innerText -> text()
+		$(this).text(index); // div안에 index넣기
+	});
+	
+	$('div').click(function(){
+		$('h1').text($(this).css('background-color'));
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+package ajax.note.db;
+
+import oracle.db.OracleConnect;
+
+public class NoteDao {
+	OracleConnect db;
+	public NoteDao(){
+		db = OracleConnect.getInstance();
+	}
+	
+	// insert
+	
+	
+	// select
+	
+	
+	// update
+	
+	
+	// delete
+	
+	
+	
+}

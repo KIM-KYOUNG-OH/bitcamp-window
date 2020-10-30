@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<item>
+		<num>55</num>
+		<name>조인성</name>
+		<buseo>홍보부</buseo>
+		<pay>5600000</pay>
+		<paytax>168000</paytax>
+	</item>
+	<item>
+		<num>45</num>
+		<name>홍나영</name>
+		<buseo>홍보부</buseo>
+		<pay>4540000</pay>
+		<paytax>72000</paytax>
+	</item>
+	<item>
+		<num>50</num>
+		<name>김지수</name>
+		<buseo>교육부</buseo>
+		<pay>2430000</pay>
+		<paytax>121000</paytax>
+	</item>
+	<item>
+		<num>60</num>
+		<name>김나은</name>
+		<buseo>교육부</buseo>
+		<pay>3300000</pay>
+		<paytax>140000</paytax>
+	</item>
+</list>

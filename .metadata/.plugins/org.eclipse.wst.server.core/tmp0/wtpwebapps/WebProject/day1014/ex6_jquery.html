@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<h1>제이쿼리 공부중...</h1>
+<h1>자바스크립트도 공부중...</h1>
+<h2 id='study'>jQuery CSS 함수</h2>
+<h2 class="star">jQuery ATTR 함수</h2>
+<h2>안녕하세요</h2>
+<script type="text/javascript">
+	// 방법1
+	//$('h1').css('color','magenta').css('cursor','pointer').css('background-color','cyan');
+	
+	// 방법2
+	$('h1').css({
+		'color':'pink',
+		'cursor':'crosshair',
+		'background-color':'yellow'
+	});
+	
+	// 이벤트
+	$('h1').click(function(){
+		// 현재 이벤트가 발생한 태그의 글자를 출력
+		alert($(this).text());
+	});
+	
+	// 아이디로 접근
+	$('#study').css({
+		"width":"400px",
+		"height":"200px",
+		"border":"5px inset pink",
+		"text-align":"center",
+		"line-height":"200px"
+	});
+	
+	// h2태그중 클래스명이 star인 경우
+	// 커서를 포인터로 주고 글자색은 blue, border는 '5px double red'
+	$('h2.star').css({
+		"cursor":"pointer",
+		"color":'blue',
+		"border":"5px double red"
+	});
+	//h2태그를 클릭할 때마다 랜덤하게 글자색 변경하기
+	$('h2').click(function(){
+		var r = parseInt(Math.random()*256);
+		var g = parseInt(Math.random()*256);
+		var b = parseInt(Math.random()*256);
+		
+		$(this).css({
+			'background-color':'rgb('+r+','+g+','+b+')'
+		});
+	});
+</script>
+</body>
+</html>

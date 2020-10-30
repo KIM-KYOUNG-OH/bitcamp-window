@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board>
+	<data id="angel1" name="이순신">
+		<subject>안녕</subject>
+		<photo>../image2/01.png</photo>
+	</data>
+	<data id="angel2" name="제우스">
+		<subject>하이</subject>
+		<photo>../image2/02.png</photo>
+	</data>
+	<data id="angel3" name="정약용">
+		<subject>으어</subject>
+		<photo>../image2/03.png</photo>
+	</data>
+	<data id="angel4" name="아테나">
+		<subject>바이</subject>
+		<photo>../image2/04.png</photo>
+	</data>
+	<data id="angel5" name="세종대왕">
+		<subject>안녕하십니까</subject>
+		<photo>../image2/05.png</photo>
+	</data>
+</board>

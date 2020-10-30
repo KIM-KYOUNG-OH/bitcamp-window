@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	#lost_stars{
+		background-image: url('../image2/cd-sprite.png');
+		width: 245px; height: 250px; background-position: left top; background-size: 100%;
+	}
+	
+	#a_higher_place{
+		background-image: url('../image2/cd-sprite.png');
+		width: 245px; height: 250px; background-position: left center; background-size: 100%;
+	}
+	
+	#like_a_fool{
+		background-image: url('../image2/cd-sprite.png');
+		width: 245px; height: 250px; background-position: left bottom; background-size: 100%;
+	}
+	
+	.select{
+		background-color: pink;
+		color: blue;
+	}
+</style>
+</head>
+<body>
+	<h2>Lost Stars</h2>
+	<div id='lost_stars' class='music'></div>
+	<h2>A Higher Place</h2>
+	<div id='a_higher_place' class='music'></div>
+	<h2>Like a Fool</h2>
+	<div id='like_a_fool' class='music'></div>
+	<script type="text/javascript">
+		$('div.music').hide();
+		$('h2').css({
+			'cursor':'pointer',
+			'width':'200px',
+			'border':'2px solid green'
+		});
+		
+		//h2에 마우스를 올리면 select 클래스 추가하고
+		//해당 글자 아래의 cd가 나오도록 한다
+		//마우스를 벗어나면 다시 cd가 올라가도록 한다
+		$('h2').hover(function(){
+			$(this).addClass('select');
+			$(this).next().slideDown('slow');
+		}, function(){
+			$(this).removeClass('select');
+			$(this).next().slideUp('fast');
+		});
+		
+	</script>
+</body>
+</html>

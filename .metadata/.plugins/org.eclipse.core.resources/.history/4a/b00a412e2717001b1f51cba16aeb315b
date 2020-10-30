@@ -1,0 +1,5 @@
+package ajax.mem.db;
+
+public class MemoDto {
+
+}

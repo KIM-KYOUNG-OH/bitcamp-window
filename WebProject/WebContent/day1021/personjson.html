@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+table{
+		border: 2px solid gray;
+		text-align: center;
+	}
+	
+table tr, table th, table td{
+		border-bottom: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	if(window.XMLHttpRequest){
+		var xhr=new XMLHttpRequest();
+		//alert('크롬,ie')
+	}else{
+		alert('Ajax를 지원하지 않는 브라우저입니다');
+	}
+	// 버튼 이벤트
+	document.getElementById('btn').onclick=function(){
+		xhr.open('get','person_to_json.jsp',true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status==200){
+					//alert('성공');
+					process();
+				}
+			}
+		}
+		xhr.send(null);
+	}
+
+	function process(){
+		
+		var textData = xhr.responseText;
+		var data = JSON.parse(textData);
+		
+		var len = data.person.length;
+		
+		//인원수만큼 반복해서 데이터 출력하기
+		var s = "";
+		for(var i=0; i<len; i++){
+			s+= "<tr>";
+			s+= "<td>" +(i+1)+ "</td>";
+			s+= "<td>"+data.person[i].name+"</td>";
+			s+= "<td>"+data.person[i].blood.toUpperCase()+"형</td>";
+			s+= "<td>"+data.person[i].java+"점</td>";
+			s+= "<td>"+data.person[i].spring+"점</td>";
+			s+= "<td>"+data.person[i].height+"cm</td>";
+			s+= "<td>"+data.person[i].birth+"</td>";
+			s+= "</tr>"
+		}
+		document.getElementById('tb').innerHTML = s;
+	}
+}
+</script>
+</head>
+<body>
+<button type='button' id=btn>목록 가져오기</button>
+<hr>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th width='100'>num</th>
+				<th width='100'>name</th>
+				<th width='100'>blood</th>
+				<th width='100'>java</th>
+				<th width='100'>spring</th>
+				<th width='100'>height</th>
+				<th width='100'>birth</th>
+			</tr>
+		</thead>
+		<tbody id='tb'>
+		
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table {
+		border: 2px solid gray;
+		width: 200px;
+	}
+	
+	table td,table th{
+		border-bottom: 1px solid gray;
+		border-right: 1px dotted gray;
+	}
+</style>
+</head>
+<body>
+<script type="text/javascript">
+	var colorArray=['red','green','magenta','gray','cyan'];
+	//테이블에 출력하는데 첫번째칸은 번호(1부터),
+	//2번째칸은 색상명(배열) 출력하는데 배경색을 해당 색상으로 출력
+</script>
+<table>
+	<tr>
+		<th>번호</th><th>색상</th>
+		<script type="text/javascript">
+			for(i=0;i<colorArray.length;i++){
+				var s="<tr align='center'>";			
+				s+="<td>"+(i+1)+"</td>";
+				s+="<td bgcolor='"+colorArray[i]+"'>"+colorArray[i]+"</td>";
+				s+="</tr>";
+				document.write(s);		
+			}
+		</script>
+	</tr>
+</table>
+</body>
+</html>

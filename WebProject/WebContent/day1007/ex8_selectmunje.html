@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#out{
+		position: absolute;
+		left: 300px;
+		 top:70px;
+		 border: 10px groove green;
+		 text-align: center;
+		 width: 300px;
+		 height: 300px;		
+		 line-height: 300px; 		 
+	}
+	
+	#myimg{
+		max-width: 200px;
+	}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	myimg=document.getElementById("myimg");
+	document.getElementById("selimage").onchange=function(){
+		myimg.src=this.value;
+	}
+}
+</script>
+</head>
+<body>
+<!-- 
+아래의 배열로 select 문을 완성한뒤 해당 이미지를 선택하면 우측으로 해당 이미지가 나오도록 해주세요
+첫줄은 "이미지를 선택하세요"(고정)
+ -->
+<h2>select 문제-선택하면 해당 이미지 출력하기</h2>
+<script type="text/javascript">
+	var imgName=['벚꽃','파마머리소녀','헬로키티','원숭이','바다','호수'];
+	var imgValue=new Array();
+	imgValue[0]='../image2/ani08.gif';
+	imgValue[1]='../image2/ani12.gif';
+	imgValue[2]='../image2/ani02.gif';
+	imgValue[3]='../image2/image_01.png';
+	imgValue[4]='../image2/m04.jpg';
+	imgValue[5]='../image2/m06.jpg';
+</script>
+<select id="selimage" style="width: 200px;font-size: 12px;">
+	<option selected disabled hidden>이미지를 선택하세요</option>
+	<script type="text/javascript">
+		for(i=0;i<imgName.length;i++){
+			var s="<option value='"+imgValue[i]+"'>"+imgName[i]+"</option>";
+			document.write(s);
+		}
+	</script>
+</select>
+<div id="out">
+	<img src="" id="myimg">
+</div>
+</body>
+</html>
+
+
+
+
+
+
+

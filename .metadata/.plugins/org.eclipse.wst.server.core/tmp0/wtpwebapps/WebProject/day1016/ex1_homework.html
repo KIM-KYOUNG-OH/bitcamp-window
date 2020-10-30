@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<div class='radio'>
+	<input type='radio' class='01' name='radio'>1&nbsp;
+	<input type='radio' class='02' name='radio'>2&nbsp;
+	<input type='radio' class='03' name='radio' checked>3&nbsp;
+	<input type='radio' class='04' name='radio'>4&nbsp;
+	<input type='radio' class='05' name='radio'>5&nbsp;
+	<input type='radio' class='06' name='radio'>6&nbsp;
+	<input type='radio' class='07' name='radio'>7&nbsp;
+	<input type='radio' class='08' name='radio'>8&nbsp;
+</div>
+<div class='image'>
+
+</div>
+<div class='large'>
+	<img>
+</div>
+<div class='arrow'>
+	<img src='../image2/leftDown.gif'>
+	<img src='../image2/rightDown.gif'>
+</div>
+<script type="text/javascript">
+	$('input:radio').css({
+		'width':'40px'
+	});
+	
+	var s = '';
+	for(i=1; i<=8; i++){
+		s+="<img src='../image2/0"+i+".png' class='doll'>"
+	}
+	
+	$('div.image').html(s);
+	$('img.doll').css({
+		'width':'68px'
+	});
+	
+	$('div.large>img').attr('src','../image2/03.png');
+	$('div.large>img').css({
+		'position':'absolute',
+		'left':'180px',
+		'width':'200px',
+		'height':'200px'
+	});
+	
+	$('input:radio').click(function(){
+		var src = $(this).attr('class');
+		$('div.large>img').attr('src','../image2/'+src+'.png');
+	});
+	
+	$('div.arrow').css({
+		'position':'absolute',
+		'left':'220px',
+		'top':'330px'
+	});
+	
+	//화살표의 커서 모양 변경
+	$('div.arrow>img').css('cursor','pointer');
+	//화살표 이벤트
+	$('div.arrow>img').eq(0).click(function(){
+		var left=parseInt($('div.large>img').css('left'),10);
+		left-=20;
+		$('div.large>img').css('left',left+'px');
+	});
+	
+	$('div.arrow>img').eq(1).click(function(){
+		$('div.large>img').css('left','+=20px');
+	});
+</script>
+</body>
+</html>

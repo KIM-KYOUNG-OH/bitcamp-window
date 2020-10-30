@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("button:eq(0)").click(function(){
+		// $.getJson 함수 사용 (Json 데이터 전용 함수)
+		$.getJSON("ex5_testjson.json", function(data) {
+			//data는 4개의 데이터를 가지고 있는 배열변수
+			var s="";
+			$.each(data, function(idx, item) {
+				s+= "<b>"+idx+"번 데이터</b><br>";
+				s+= "Term : "+item.term+"<br>";
+				s+= "part : "+item.part+"<br>";
+				s+= "definition : " +(item.definition==null?"no":item.definition)+"<br>";
+				s+= "quote : ";
+				if(item.quote==null){
+					s+= "없음<br>";
+				}else{
+					$.each(item.quote, function(i, elt){
+						s+= "["+elt+"]";
+					});
+					s+= "<br>";
+				}
+				s+= "author : ";
+				if(item.author==null){
+					s+= "없음<br>";
+				}else{
+					s+= item.author+"<br>";
+				}
+				s+="<hr>";
+			});
+			$("#out1").html(s);
+		});
+	});
+	
+	$("button:eq(1)").click(function(){
+		$.get("ex5_testxml.xml", function(data){
+			var s = "";
+			$(data).find("bang").each(function(i, element){
+				var n = $(this);
+				s+= "<b>" +i+ "</b><br>";
+				s+= "Name : " +n.attr("name") +"<br>";
+				s+= "Part : " +n.attr("part") +"<br>";
+				s+= "Msg : " +n.find("msg").text() +"<hr>";
+				
+			});
+			
+			$("#out2").html(s);
+		});
+	});
+});
+</script>
+</head>
+<body>
+<button type='button' class="btn btn-danger btn-lg">JSON 데이터 읽기</button>
+<div id="out1"></div>
+<hr>
+<button type='button' class="btn btn-danger btn-lg">XML 데이터 읽기</button>
+<div id="out2"></div>
+</body>
+</html>

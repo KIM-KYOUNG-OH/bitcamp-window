@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="#" id='frm'>
+		<fieldset style="width: 400px;">
+			<legend>로그인 페이지</legend>
+			<b>ID : </b><br>
+			<input type='text' id='name' required="required"><br>
+			<b>Password : </b><br>
+			<input type='password' id='password' required="required"><br>
+			<input type='submit' id='Login'><br>
+		</fieldset>
+	</form>
+	<script type="text/javascript">
+		var f = document.getElementById('frm');
+
+		f.onsubmit = function(e) {
+			e.preventDefault();
+			var id = document.getElementById('name').value;
+			var password = document.getElementById('password').value;
+
+			// localStorage에 저장
+			localStorage["id"] = id;
+			localStorage["password"] = password;
+
+			// 비밀번호가 1234이면 success로 이동
+			if (password == '1234') {
+				location.href = "success.html";
+			} else {
+				location.href = 'fail.html';
+			}
+		}
+	</script>
+</body>
+</html>

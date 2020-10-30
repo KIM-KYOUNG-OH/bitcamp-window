@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>select 이벤트 테스트</h2>
+<select id="sel" onchange="gourl()">
+	<option selected disabled hidden>선택해주세요</option><!-- 처음에만 보임,이벤트 발생안함 -->
+	<option value="http://www.naver.com">네이버</option>
+	<option value="http://www.nate.com">네이트</option>
+	<option value="http://www.google.com">구글</option>
+	<option value="http://cafe.naver.com/zipsy">이문희강사카페</option>	
+</select>
+<script type="text/javascript">
+	function gourl(){
+		//alert(sel.value);
+		//href: 페이지 이동하는 함수
+		location.href=sel.value;
+	}
+</script>
+<hr>
+<h2>생년월일 선택하기</h2>
+<!-- 년도는 현재년도부터 1950 년까지 거꾸로 -->
+<select id="selyear">
+	<option selected disabled hidden>년도선택</option>
+	<script type="text/javascript">
+		var year=new Date().getFullYear();
+		for(var i=year;i>=1950;i--){
+			var s="<option>"+i+"</option>";
+			document.write(s);
+		}	
+	</script>
+</select>
+<!-- 월은 1~12 월까지 -->
+<select id="selmonth">
+	<option selected disabled hidden>월선택</option>
+	<script type="text/javascript">
+		for(var i=1;i<=12;i++){
+			var s="<option>"+i+"</option>";
+			document.write(s);
+		}	
+	</script>
+</select>
+<!-- 일은 1~31 까지 -->
+<select id="selday">
+	<option selected disabled hidden>월선택</option>
+	<script type="text/javascript">
+		for(var i=1;i<=31;i++){
+			var s="<option>"+i+"</option>";
+			document.write(s);
+		}	
+	</script>
+</select>
+<div id="out" style="font-size: 2em;"></div>
+<script type="text/javascript">
+	var y="";
+	var m="";
+	var d="";
+	
+	document.getElementById("selyear").onchange=function(){
+		y=this.value;
+		var s=y+"년 "+m+"월 "+d+"일생입니다";
+		out.innerHTML=s;
+	}
+	document.getElementById("selmonth").onchange=function(){
+		m=this.value;
+		var s=y+"년 "+m+"월 "+d+"일생입니다";
+		out.innerHTML=s;
+	}
+	document.getElementById("selday").onchange=function(){
+		d=this.value;
+		var s=y+"년 "+m+"월 "+d+"일생입니다";
+		out.innerHTML=s;
+	}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

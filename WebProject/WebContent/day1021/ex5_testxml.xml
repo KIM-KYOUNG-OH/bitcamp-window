@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bangsong>
+	<title>Ajax 공부하기</title>
+	<bang name="kbs" part="one">
+		<msg>공영방송</msg>
+	</bang>
+	<bang name="mbc" part="two">
+		<msg>만나면 좋은친구</msg>
+	</bang>
+	<bang name="sbs" part="three">
+		<msg>재미있는 방송</msg>
+	</bang>
+</bangsong>

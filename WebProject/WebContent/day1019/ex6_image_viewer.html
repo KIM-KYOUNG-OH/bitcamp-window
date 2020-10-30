@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style>
+table tr td{
+	border: 1px solid black;
+}
+
+.small img{
+	border: none;
+	margin: 10px;
+	width: 60px;
+	height: 60px;
+}
+
+.large{
+	width: 200px;
+	height: 250px;
+}
+
+.hover{
+	color: blue;
+	background-color: pink;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	$('.small').hover(function(){
+		$(this).parent.addClass('hover');
+		var imgname = $(this).attr('href');
+		//$('.large').attr('src',imgname);
+		$('.large').fadeTo('slow',0,function(){
+			$(".large").attr('src',imgname);
+		}).fadeTo('slow',1); 
+		
+	}, function(){
+		$(this).parent().removeClass('hover');
+	});
+});
+</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td width='150' align='center'><a href='../image/10.JPG'
+				class='small'> <img alt="" src="../image/10.JPG">
+			</a>
+				<p>아이유</p></td>
+			<td rowspan='4' width='350' align='center'><img alt=""
+				src="../image/10.JPG" class='large'></td>
+		</tr>
+		
+		<tr>
+			<td width='150' align='center'><a href='../image/13.JPG'
+				class='small'> <img alt="" src="../image/13.JPG">
+			</a>
+				<p>박보영</p></td>
+		</tr>
+		
+		<tr>
+			<td width='150' align='center'><a href='../image/27.JPG'
+				class='small'> <img alt="" src="../image/27.JPG">
+			</a>
+				<p>하지원</p></td>
+		</tr>
+		
+		<tr>
+			<td width='150' align='center'><a href='../image/26.JPG'
+				class='small'> <img alt="" src="../image/26.JPG">
+			</a>
+				<p>산토리니</p></td>
+		</tr>
+	</table>
+</body>
+</html>

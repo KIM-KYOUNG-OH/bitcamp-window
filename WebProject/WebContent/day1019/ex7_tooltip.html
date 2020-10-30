@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	div.tooltip{
+		line-height: 1.5;
+		color: white;
+		width: 200px;
+		background-color: #f90;
+		border: 2px solid white;
+		padding: 1em; 
+		font-size: 10px;
+		border-radius: 30px; 
+	}
+	
+	b.view{
+		cursor: pointer;
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	$('div.tooltip').css({
+		opacity: '0.9',
+		position:'absolute',
+		display: 'none'
+	});
+	
+	$('a'),bind({
+		mouseover:function(){
+			$('div.tooltip').fadeIn();
+		}, mouseout: function(){
+			$('div.tooltip').fadeOut();
+		}, mousemove: function(e){
+			$('div.tooltip').css({
+				top:e.pageY+10+'px',
+				left:e.pageX+10+'px'
+			});
+		}
+	});
+});
+</script>
+</head>
+<body>
+<h3>tooltip 링크 부분에 마우스를 올려보세요</h3>
+<a style='font-size: 20px;'>tooltip</a>
+<pre>
+김승욱 기자 = 김창룡 경찰청장은 서울 광화문 <b class='view'>일대 집회와 관련해 19일</b> "행정명령 기준이 변경됐기 때문에 허용되는 장소·인원의 집회에 대해서는 최대한 보장하겠다"고 밝혔다.
+
+김 청장은 이날 기자 간담회에서 "집회 시에도 마스크 쓰기, 거리두기 등 방역 조치가 제대로 이행될 수 있도록 지방자치단체와 협조하겠다"며 이렇게 말했다.
+
+김 청장은 경찰이 방역 당국의 행정명령을 따라야 한다며 "<b class='view'>방역 당국의 기준을 위반해 열리는 미신고·금지 집회에 대해서는 제지</b>하고 차단할 수밖에 없다"고 밝혔다.
+</pre>
+<script type="text/javascript">
+$('a'),bind({
+	mouseover:function(){
+		$('div.tooltip').fadeIn();
+	}, mouseout: function(){
+		$('div.tooltip').fadeOut();
+	}, mousemove: function(e){
+		$('div.tooltip').css({
+			top:e.pageY+10+'px',
+			left:e.pageX+10+'px',
+			fontSize: '25px'
+		});
+		$('div.tooltip').text($(this).text());
+	}
+});
+</script>
+
+<div class='tooltip'>
+	Java<br>
+	Oracle<br>
+	HTML5<br>
+	JavaScript<br>
+	JQuery<br>
+</div>
+</body>
+</html>

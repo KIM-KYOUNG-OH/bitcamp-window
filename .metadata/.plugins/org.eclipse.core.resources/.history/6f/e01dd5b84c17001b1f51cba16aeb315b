@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<%@page import="oracle.jdbc.OracleConnection"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/xml; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% 
+	OracleConnection conn = null;
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String sql="select * from sawon order by name asc";
+	OracleConnect db = OracleConnect.getInstance();
+	conn = db.getConnection();
+%>

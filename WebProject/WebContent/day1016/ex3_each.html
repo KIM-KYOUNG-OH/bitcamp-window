@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<div id='one'></div>
+<script type="text/javascript">
+	var color=['red','orange','blue','green','tomato'];
+	var s='';
+	// 배열 갯수만큼 반복하는 방법(each문을 이용해서)
+	$.each(color, function(index, item){
+		//console.log(color[index]+','+item)
+		s+='<h3 style="color:'+item+'">'+item+'</h3>';
+	});
+	
+	$('#one').html(s);
+</script>
+<hr>
+<div id='two'></div>
+<script type="text/javascript">
+	var info=[
+		{name:'강호동', color:'blue', addr:'서울'},
+		{name:'마이클', color:'green', addr:'부산'},
+		{name:'캐서린', color:'magenta', addr:'제주도'},
+		{name:'캔디', color:'tomato', addr:'부산'}
+	];
+	var s='';
+	$.each(info,function(index,item){
+		s += "<h3 style='color: " +item.color+ "'>"
+		s += (index+1)+ '번 '+item.name+ '님은 ' +item.addr+ '에 삽니다</h3>';
+	});
+	$('#two').html(s);
+</script>
+<hr>
+<div id='three'></div>
+<script type="text/javascript">
+	var link = [
+		{name:'네이버',url:'http://www.naver.com'},
+		{name:'네이트',url:'http://www.nate.com'},
+		{name:'구글',url:'http://www.google.com'}
+	];
+	// id three에 link배열을 a태그 형태로 넣어주세요
+	// 예: 네이버가 보이는 값이고 네이버를 클릭하면 해당 url로 이동
+	// <a href='url'>name</a>
+	var s = '';
+	$.each(link, function(index,item){
+		s += '<a href="'+link[index].url+'" target="_new">'+link[index].name+'</a><br>'
+		// 새로운 페이지로 해당url이 열리도록 하려면
+		
+	});
+	
+	$('#three').html(s);
+</script>
+</body>
+</html>

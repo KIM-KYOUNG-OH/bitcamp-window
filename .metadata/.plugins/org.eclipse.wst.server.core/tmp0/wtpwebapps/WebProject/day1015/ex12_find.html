@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<b>b태그<span class='s1'>span태그</span>
+<span class='s2'>또 span태그</span></b>
+<br>
+<div class='one'>
+	첫번째 div
+	<div class='hana'>div 하나</div>
+	<div>div 둘</div>
+	<div>div 셋</div>
+</div>
+<div class='two'>
+	두번째 div
+	<div class='hana'>div 하나</div>
+	<div>div 둘</div>
+	<div>div 셋</div>
+</div>
+<script type="text/javascript">
+	//selector의 부모태그에 css적용(div.one)
+	$('div.one>div.hana').parent().css('border','2px dotted red');
+	// siblings(): 나를 제외한 나머지 형제
+	$('span.s1').parent().siblings().css({
+		'border':'3px inset gold',
+		'width':'200px'
+	});
+	
+	// div의 자식태그중 .hana를 찾아서 글자색 변경
+	//$('div').children('.hana').css('color','magenta');
+	
+	$('div').find('.hana').css('color','orange');
+</script>
+</body>
+</html>

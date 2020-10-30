@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//처음 로드시 호출되는 함수
+	window.onload=function(){
+		//요소값을 얻는다
+		var btn2=document.getElementById("btn2");
+		var out=document.getElementById("out");
+		//해당 요소값에 이벤트를 준다
+		btn2.onclick=function(){
+			//alert("버튼 1 클릭");
+			
+			//html 코드 삽입
+			out.innerHTML="<h3>버튼2 클릭!!</h3>";
+		}
+	}	
+</script>
+</head>
+<body>
+<button type="button" id="btn1">버튼1</button>
+<button type="button" id="btn2">버튼2</button>
+<hr>
+<div id="out" style="color: blue;font-size: 1.5em;"></div>
+<script type="text/javascript">
+	//요소값을 얻는다
+	var btn1=document.getElementById("btn1");
+	var out=document.getElementById("out");
+	//해당 요소값에 이벤트를 준다
+	btn1.onclick=function(){
+		//alert("버튼 1 클릭");
+		
+		//html 코드 삽입
+		out.innerHTML="<h3>버튼 클릭!!</h3>";
+	}
+</script>
+</body>
+</html>

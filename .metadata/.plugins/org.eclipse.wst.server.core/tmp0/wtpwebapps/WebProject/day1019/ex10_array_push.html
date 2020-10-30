@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var array = new Array();
+	var data1=new Object();
+	data1.name-'한가인';
+	data1.addr='서울시 강남구';
+	//array에 data1추가
+	array.push(data1);
+	
+	var data2=new Object();
+	data2.name-'이영자';
+	data2.addr='서울시 영등포구';
+	array.push(data2);
+	
+	var data3=new Object();
+	data3.name-'강호동';
+	data3.addr='제주시 애월읍';
+	array.push(data3);
+	
+	
+	$.each(array, function(index, item){
+		var s = '';
+		s+='번호:'+(index+1)+', 이름:'+item.name+', 주소:' +item.addr+"<br>";
+		document.write(s);
+	});
+</script>
+</body>
+</html>

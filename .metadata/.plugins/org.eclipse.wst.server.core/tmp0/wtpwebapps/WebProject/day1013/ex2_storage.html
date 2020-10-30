@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btnadd">저장</button>
+<button id="btndel">삭제</button>
+<button id="btnalldel">전체삭제</button>
+<button id="btnview">내용보기</button>
+<div id="view"></div>
+<script type="text/javascript">
+	document.getElementById("btnadd").onclick=function(){
+		// 로컬 스토리지에 데이터 저장하는 방법 3가지
+		localStorage.setItem("name", "강호동");
+		localStorage.age="31세";
+		localStorage["addr"]="서울";
+	}
+	
+	document.getElementById("btndel").onclick=function(){
+		// 로컬 스토리지에 데이터 삭제하는 방법
+		localStorage.removeItem("name");
+	}
+		
+	document.getElementById("btnalldel").onclick=function(){
+		localStorage.clear();
+	}
+	
+	document.getElementById("btnview").onclick=function(){
+		var s = "1번째 방법으로 데이터 얻기<br>";
+		s+="이름:"+localStorage.getItem("name")+"<br>";
+		s+="나이:"+localStorage.getItem("age")+"<br>";
+		s+="주소:"+localStorage.getItem("addr")+"<hr>";
+		
+		s+= "2번째 방법으로 데이터 얻기<br>";
+		s+="이름:"+localStorage.name+"<br>";
+		s+="나이:"+localStorage.age+"<br>";
+		s+="주소:"+localStorage.addr+"<hr>";
+		
+		s+= "3번째 방법으로 데이터 얻기<br>";
+		s+="이름:"+localStorage["name"]+"<br>";
+		s+="나이:"+localStorage["age"]+"<br>";
+		s+="주소:"+localStorage["addr"]+"<hr>"; 
+		view.innerHTML=s;
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style>
+	#one{
+		position: relative;
+		width: 50px;
+		height: 50px;
+		background-color: green;
+	}
+</style>
+</head>
+<body>
+<img alt="" src="../image2/01.png" id='img1' width='100px'>
+<script type="text/javascript">
+	$('#img1').animate({'width':'200px', 'opacity':'0.5'});
+</script>
+<hr>
+<div id='one'></div>
+<script type="text/javascript">
+	$('#one').animate({left:'+=60'}, 'slow').animate({left:'+=60'}, 2000);
+	$('#one').animate({width:'+=50', height:'+=50'},'slow');
+	
+	// 일정한 시간후 딱 한번 호출
+	setTimeout(function(){
+		$('#one').hide();
+	}, 5000);
+</script>
+</body>
+</html>

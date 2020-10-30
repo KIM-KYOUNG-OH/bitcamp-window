@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div.imggame{
+		position: absolute;
+		left: 200px;
+		top: 100px;
+		text-align: center;
+	}
+	div.imggame button{
+		border: 3px groove gray;
+		width: 120px;
+		height: 30px;
+		border-radius: 100px;
+	}
+	div.imggame button:hover{
+		background-color: red;
+		color: yellow;
+		cursor: pointer;
+	}
+</style>
+</head>
+<body>
+<div class="imggame">
+	<button type="button" id="btnLarge">점점더크게</button>
+	<button type="button" id="btnSmall">점점더작게</button>
+	<br><br>
+	<!-- <img src="../image/1.JPG" width="300" id="myimg"> -->
+	<img src="../image/1.JPG" style="width: 300px" id="myimg">
+</div>
+
+<script type="text/javascript">
+   var myimg=document.getElementById("myimg");
+   
+   document.getElementById("btnLarge").onclick=function(){
+	   //alert("large");
+	   //속성으로 width 를 준경우 변경하기
+	   //var w=myimg.getAttribute("width");//width 속성값 얻기
+	   //w+=10;//문자열로 타입이 정해져서 30010 이 된다
+	   //alert(typeof(w));//내부적으로 지정된 타입 확인	   
+	   //w=parseInt(w)+10;//w를 정수타입으로 변경후 10 더하기
+	   //이미지 크기 변경
+	   //myimg.setAttribute("width", w);
+	   
+	   var w=myimg.style.width;//스타일쉬트로 너비를 준경우
+	   w=parseInt(w,10)+10;//10진수값만 정수타입으로 얻기
+	   myimg.style.width=w+"px";
+	  // alert(w);
+   }
+   
+	document.getElementById("btnSmall").onclick=function(){
+		//alert("small");
+		//var w=parseInt(myimg.getAttribute("width"));
+		//w-=10;
+		//myimg.setAttribute("width",w);
+		
+		//스타일로 너비를 준경우
+		var w=myimg.style.width;
+		w=parseInt(w,10)-10;//10진수값만 정수타입으로 얻기
+		myimg.style.width=w+"px";
+   }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

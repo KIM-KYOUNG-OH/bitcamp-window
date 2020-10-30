@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("btnStart").onclick=function(){
+		//multiple일 경우 선택한 파일의 갯수
+		//alert(document.getElementById("file").files.length+"개 선택");
+		
+		// 선택한 첫번째 파일의 정보
+		var file = document.getElementById("file").files[0];
+		//alert(file.name+","+file.size);
+		
+		//파일명과 바이트단위 출력
+		document.getElementById("filename").textContent=file.name;
+		document.getElementById("filesize").textContent="("+ file.size+" byte)";
+		
+		// 내용 읽어오기
+		var reader = new FileReader();
+		reader.onload=function(){
+			var content = document.getElementById("content");
+			content.textContent = reader.result // result는 읽은 결과
+		}
+		
+		// 만약 에러가 나올경우
+		reader.onerror=function(e){
+			alert("읽기오류:"+e.target.error.code);
+		}
+		
+		var encodeList = document.getElementById("encoding");
+		var encoding = encodeList.value; // 인코딩값
+		
+		reader.readAsText(file, encoding);
+	}
+}
+</script>
+<body>
+<h1>File 읽기</h1>
+<input type="file" id='file'>
+<select id="encoding">
+	<option>UTF-8</option>
+	<option>EUC-KR</option>
+</select>
+<button type="button" id="btnStart">읽기</button>
+<hr>
+<div>
+	<span id="filename">파일이름</span>
+	<span id="filesize">파일크기</span>
+</div>
+<textarea rows="20" cols="50" id="content"></textarea>
+</body>
+</html>

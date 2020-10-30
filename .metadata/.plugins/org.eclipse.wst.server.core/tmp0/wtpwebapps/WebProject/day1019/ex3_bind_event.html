@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	.box{
+		border: 5px inset gold;
+	}
+</style>
+</head>
+<body>
+<img src='../image2/image_03.png' id='img1'>
+<script type="text/javascript">
+	// 이벤트 묶어서 처리하기
+	$('#img1').bind({
+		click:function(){
+			// 클릭시 랜덤하게 이미지 변경
+			var arr = ['image_01.png','08.png','a02.png','c2.png','a05.png'];
+			//0~4까지 난수발생
+			var idx = parseInt(Math.random()*5);
+			// 이미지 변경
+			$(this).attr('src','../image2/'+arr[idx]);
+		}, mouseover:function(){
+			$(this).addClass('box');
+		}, mouseout:function(){
+			$(this).removeClass('box');
+		}
+	});
+</script>
+<hr>
+<h1>오늘은 월요일입니다</h1>
+<script type="text/javascript">
+	// 이벤트에 따라 코드가 같은 경우 bind로 묶어서 처리하기
+	$('h1').bind('mouseenter mouseleave', function(){
+		$(this).toggleClass('box');
+	});
+</script>
+</body>
+</html>

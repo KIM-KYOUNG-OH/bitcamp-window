@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+table{
+		border: 2px solid gray;
+	}
+	
+table tr, table th, table td{
+		border-bottom: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	if(window.XMLHttpRequest){
+		var xhr=new XMLHttpRequest();
+		//alert('크롬,ie')
+	}else{
+		alert('Ajax를 지원하지 않는 브라우저입니다');
+	}
+	document.getElementById('btn').onclick=function(){
+		// method방식, 파일명, 비동기방식(true)
+		xhr.open('get','sawon.xml',true);
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4){
+				if(xhr.status==200){
+					//alert('성공\n'+xhr.responseText);
+					// 하지만 xml데이터 형태로 받아야 분석이 가능하다
+					var data=xhr.responseXML;
+					// item 단위로 데이터 가져오기
+					var itemNode=data.getElementsByTagName('item');
+					//item 갯수 확인하기
+					//alert(itemNode.length);
+					var numNode = data.getElementsByTagName("num");
+					var nameNode = data.getElementsByTagName('name');
+					var buseoNode = data.getElementsByTagName("buseo");
+					var payNode = data.getElementsByTagName('pay');
+					var paytaxNode = data.getElementsByTagName('paytax');
+					
+					var s = '';
+					for(i=0;i<itemNode.length; i++){
+						s+= "<tr>";
+						s+= "<td>"+numNode[i].childNodes[0].nodeValue+"</td>";
+						s+= "<td>"+nameNode[i].childNodes[0].nodeValue+"</td>";
+						s+= "<td>"+buseoNode[i].childNodes[0].nodeValue+"</td>";
+						s+= "<td>"+payNode[i].childNodes[0].nodeValue+"</td>";
+						s+= "<td>"+paytaxNode[i].childNodes[0].nodeValue+"</td>";
+						s+= "</tr>";
+					}
+					document.getElementById("tb").innerHTML=s;
+				}else{
+					alert("error:"+xhr.status);
+				}
+			}
+		}
+		xhr.send(null);
+	}
+}
+</script>
+</head>
+<body>
+<button type='button' id=btn>목록 가져오기</button>
+<hr>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th width='100'>num</th>
+				<th width='100'>name</th>
+				<th width='100'>buseo</th>
+				<th width='100'>pay</th>
+				<th width='100'>paytax</th>
+			</tr>
+		</thead>
+		<tbody id='tb'>
+		
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

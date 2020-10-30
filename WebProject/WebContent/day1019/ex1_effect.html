@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	.box{
+		width: 100px;
+		height: 100px;
+		border: 10px solid tomato;
+		background-color: orange; 
+	}
+</style>
+</head>
+<body>
+<button type='button' id='btn1'>hide</button>
+<button type='button' id='btn2'>show</button>
+<button type='button' id='btn3'>slide up</button>
+<button type='button' id='btn4'>slide down</button>
+<button type='button' id='btn5'>fade out</button>
+<button type='button' id='btn6'>fade in</button>
+<button type='button' id='btn7'>fade to</button>
+<hr>
+<button type='button' id='btn8'>toggle</button>
+<button type='button' id='btn9'>slide toggle</button>
+<button type='button' id='btn10'>fade toggle</button>
+<hr>
+<h1>Effect Test 문장입니다</h1>
+<img src='../image2/image_01.png'>
+<script type="text/javascript">
+	$('#btn1').click(function(){
+		$('h1').hide();
+		$('img').hide();
+	});
+	$('#btn2').click(function(){
+		$('h1').show();
+		$('img').show();
+	});
+	$('#btn3').click(function(){
+		$('h1').slideUp('slow');
+		$('img').slideUp('slow');
+	});
+	$('#btn4').click(function(){
+		$('h1').slideDown('slow');
+		$('img').slideDown('slow');
+	});
+	$('#btn5').click(function(){
+		$('h1').fadeOut('slow');
+		$('img').fadeOut('slow');
+	});
+	$('#btn6').click(function(){
+		$('h1').fadeIn('slow');
+		$('img').fadeIn('slow');
+	});
+	$('#btn7').click(function(){
+		$('h1').fadeTo('slow', 0.5);
+		$('img').fadeTo('slow', 0.5, function(){
+			$(this).after('<b>이미지 이벤트 끝!!</b>')
+		});
+	});
+	$('#btn8').click(function(){
+		$('h1').toggle('slow');
+		$('img').toggle('slow');
+	});
+	$('#btn9').click(function(){
+		$('h1').slideToggle('slow');
+		$('img').slideToggle('slow');
+	});
+	$('#btn10').click(function(){
+		$('h1').fadeToggle('slow');
+		$('img').fadeToggle('slow');
+	});
+</script>
+<hr>
+<button type='button' id='btn11'>toggle class</button>
+<div></div>
+<script type="text/javascript">
+	$('#btn11').click(function(){
+		$('div').toggleClass('box');
+	});
+</script>
+</body>
+</html>

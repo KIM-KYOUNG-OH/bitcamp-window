@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	var year=2019;
+	var month=2;
+	var d1=new Date(year,month-1,1);//월은 month-1 값을 보낸다 (2일의 요일을 얻기위해서 3번째는 1)
+	//alert(d1);
+	//요일값 얻기
+	var week=d1.getDay();//일:0,월:1...토:6
+	document.write(year+"년"+month+"월확인<br>");
+	document.write("요일숫자;"+week+"<br>");
+	//해당 달이 몇일까지 있는지 구하기
+	var endday=0;//몇일까지 있는지 구하기
+	switch(month){
+	case 2:
+		if(year%4==0 && year%100!=0 || year%400==0)
+			endday=29;
+		else
+			endday=28;
+		break;
+	case 4: case 6: case 9: case 11:
+		endday=30;
+		break;
+	default:
+		endday=31;
+	}
+	document.write(endday+"까지 있어요");
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

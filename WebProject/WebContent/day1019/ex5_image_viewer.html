@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style>
+	.imge{
+		position: absolute; top: 100px;
+		left: 100px;
+	}
+	
+	.imge img{width: 300px;} 
+</style> 
+<script type="text/javascript">
+$(function(){
+	//일단 첫번째 사진이 나오도록한다
+	$('.imge').hide();
+	$('.imge:first').fadeIn('slow');
+	$('a.imge').click(function(event){
+		event.preventDefault();
+		$(this).fadeIn('slow');
+		var next = ($(this).index()==5?null:$(this).next());
+		if(next==null){
+			alert('마지막 사진입니다');
+		}else{
+			$(this).fadeOut('slow');
+			next.fadeIn('slow')
+		}
+	});
+	
+});
+</script>
+</head>
+<body>
+<h2>이미지를 클릭하면 다음사진이 계속올라온다</h2>
+	<a href="../image/2.JPG" class='imge'>
+		<img alt="" src="../image/2.JPG">
+	</a>
+	<a href="" class='imge'>
+		<img alt="" src="../image/2.JPG">
+	</a>
+	<a href="" class='imge'>
+		<img alt="" src="../image/26.JPG">
+	</a>
+	<a href="" class='imge'>
+		<img alt="" src="../image/30.JPG">
+	</a>
+	<a href="" class='imge'>
+		<img alt="" src="../image/17.JPG">
+	</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table{
+		border: 1px solid gray;
+		font-size: 12pt;
+	}
+	table td,table th{
+		border: 1px solid gray;
+	}
+</style>
+</head>
+<body>
+<h2>Form Tag 연습</h2>
+<form action="#">
+<table>
+	<tr>
+		<th width="100">제목</th>
+		<th width="300">폼태그</th>
+	</tr>
+	<tr>
+		<td>text</td>
+		<td>
+			<input type="text" id="txt1" maxlength="5" placeholder="input name"
+				required="required" pattern="[A-Za-z]{3,}"> 
+				<!-- 
+				required 필수입력
+				pattern="[0-9]{3} 숫자 3글자만 가능 
+				pattern="[A-Za-z]{3,} :앞파벳만 가능,3글자 이상가능-->
+		</td>
+	</tr>
+	<tr>
+		<td>password</td>
+		<td>
+			<input type="password" id="pw1" maxlength="5" placeholder="input pass">
+		</td>
+	</tr>
+	<tr>
+		<td>file</td>
+		<td>
+			<input type="file">
+		</td>
+	</tr>
+	<tr>
+		<td>color</td>
+		<td>
+			<input type="color" id="color1" value="#ff00ff">
+		</td>
+	</tr>
+	<tr>
+		<td>date</td>
+		<td>
+			<input type="date" id="date1" value="2020-12-25">
+		</td>
+	</tr>
+	<tr>
+		<td>email</td>
+		<td>
+			<input type="email" id="email1">
+		</td>
+	</tr>
+	<tr>
+		<td>select(1 size)</td>
+		<td>
+			<select>
+				<option>사과</option>
+				<option>오렌지</option>
+				<option>파인애플</option>				
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>select(3 size)</td>
+		<td>
+			<select size="3">
+				<option>사과</option>
+				<option>오렌지</option>
+				<option>파인애플</option>				
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>select(3 size)<br>multi</td>
+		<td>
+			<select size="3" multiple="multiple">
+				<option>사과</option>
+				<option>오렌지</option>
+				<option>파인애플</option>				
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>radio</td>
+		<td>
+			<!-- radio 를 그룹으로 묶으려면 반드시 name 이 같아야한다 -->
+			<input type="radio" value="java" name="test">Java
+			<input type="radio" value="html" name="test" checked="checked">HTML
+			<input type="radio" value="oracle" name="test">Oracle			
+		</td>
+	</tr>
+	<tr>
+		<td>checkbox</td>
+		<td>
+			<!-- checkbox 를 그룹으로 묶으려면 반드시 name 이 같아야한다 -->
+			<input type="checkbox" value="java" name="test2">Java
+			<input type="checkbox" value="html" name="test2" checked="checked">HTML
+			<input type="checkbox" value="oracle" name="test2">Oracle			
+		</td>
+	</tr>
+	<tr>
+		<td>image(submit기능)</td>
+		<td>
+			<input type="image" src="../image2/btn09.gif" >
+		</td>
+	</tr>	
+	<tr>
+		<td>submit(4버전)</td>
+		<td>
+			<input type="submit" value="서버전송" >
+		</td>
+	</tr>
+	<tr>
+		<td>submit(5버전)</td>
+		<td>
+			<button type="submit">서버전송2</button>
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+

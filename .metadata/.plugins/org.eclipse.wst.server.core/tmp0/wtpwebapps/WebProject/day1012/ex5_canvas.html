@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=function(){
+	//캔바스에 그림을 그리기 위한 기본 작업
+	var can=document.getElementById("mycanvas");
+	var ct=can.getContext("2d");
+	var str="HTML5 에서 그리기";
+	ct.strokeStyle="rgb(255,150,0)";
+	ct.fillStyle="rgb(255,0,255)";
+	ct.font="38px Arial";
+	ct.fillText(str,100,200);
+	ct.strokeText(str,100,230);
+	
+	//3초뒤에 랜덤하게 사각형 그리기
+	setTimeout(function() {
+		x=parseInt(Math.random()*500);
+		y=parseInt(Math.random()*500);
+		red=parseInt(Math.random()*256);
+		green=parseInt(Math.random()*256);
+		blue=parseInt(Math.random()*256);
+		
+		ct.fillStyle="rgb("+red+","+green+","+blue+")";
+		ct.fillRect(x, y, 100, 100);		
+	},3000);
+	
+	//이미지
+	var image=new Image();
+	image.src="https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/sc/2020/10/12/2020101301000734000051031.jpg";
+	//image.src="../image2/ani12.gif";
+	image.onload=function(){
+		ct.drawImage(image,10,10,100,100);
+		ct.save();
+	}
+}
+</script>
+</head>
+<body>
+<canvas id="mycanvas" width="500" height="500" style="border: 5px inset orange;"></canvas>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

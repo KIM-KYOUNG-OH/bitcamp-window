@@ -1,0 +1,8 @@
+<%@page import="ajax.note.db.NoteDao"%>
+<%@ page language="java" contentType="text/json; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	NoteDao dao = new NoteDao();
+	
+
+%>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<img alt="" src="" id='img1'>
+<img alt="" src="" id='img2'>
+<h2 id='open' width="400" height='300'>윈도우 오픈</h2>
+<script type="text/javascript">
+	//attr 을 이용해서 속성값을 얻거나 속성값을 변경해본다
+	$('#img1').attr('src','../image2/ani12.gif');
+	
+	//여러개의 속성을 한꺼번에 변경하는 방법
+	$("#img2").attr({
+		'src':'../image/5.JPG',
+		'width':'200px',
+		'title':'누구죠???'
+	});
+	
+	// h2에 마우스 올리면 커서모양이랑 배경색 변경
+	$('#open').mouseover(function() {
+		$(this).css({
+			'cursor':'pointer',
+			'background-color':'lime'
+		});
+	});
+	
+	// h2에서 마우스가 벗어나면 배경색은 흰색
+	$('#open').mouseout(function(){
+		$(this).css('background-color','white');
+	});
+	
+	// h2에서 클릭을 하면 속성중 width,height값 얻어오기
+	$('#open').click(function(){
+		var w=$(this).attr('width');
+		var h=$(this).attr('height');
+		//alert(w+','+h);
+		//window.open('파일명','윈도우명','속성')
+		window.open('ex7_addclass_each.html','','width='+w+'px, height='+h+'px,'+ 
+				'top=100px, left = 100px');
+	});
+	
+	// 이미지1에 마우스를 올리면 ani08.gif로 변경
+	// 마우스가 벗어나면 원래 이미지로 변경
+	$('#img1').mouseenter(function(){
+		$(this).attr('src','../image2/ani08.gif');
+	});
+	
+	$('#img1').mouseleave(function(){
+		$(this).attr('src','../image2/ani12.gif');
+	});
+	
+</script>
+</body>
+</html>

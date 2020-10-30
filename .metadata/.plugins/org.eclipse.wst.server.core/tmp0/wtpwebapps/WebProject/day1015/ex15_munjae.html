@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	#images img{
+		float: left;
+		border: 1px solid black;
+		margin: 2px;
+		width: 100px;
+	}
+	
+	#radios input{
+		margin-left: 50px;
+		margin-right: 3px;
+	}
+	
+	#bigimage{
+		position: relative;
+		left: 200px;  
+		width: 300px;
+	}
+	
+	#changeimage img{
+		float: left;
+		text-align: center; 
+	}
+</style>
+</head>
+<body>
+<div id='images'>
+	<img src='../image2/01.png'>
+	<img src='../image2/02.png'>
+	<img src='../image2/03.png'>
+	<img src='../image2/04.png'>
+	<img src='../image2/05.png'>
+	<img src='../image2/06.png'>
+	<img src='../image2/07.png'>
+	<img src='../image2/08.png'>
+</div><br><br><br><br><br><br>
+<div id='radios'>
+	<label><input type='radio' id='img01'>1</label>
+	<label><input type='radio' id='img02'>2</label>
+	<label><input type='radio' id='img03'>3</label>
+	<label><input type='radio' id='img04'>4</label>
+	<label><input type='radio' id='img05'>5</label>
+	<label><input type='radio' id='img06'>6</label>
+	<label><input type='radio' id='img07'>7</label>
+	<label><input type='radio' id='img08'>8</label>
+</div><br><br>
+<img src='../image2/01.png' id='bigimage'>
+<br>
+<div id='changeimage'>
+	<img alt="" src="../image2/leftDown.gif">
+	<img alt="" src="../image2/rightDown.gif">
+</div>
+</body>
+</html>

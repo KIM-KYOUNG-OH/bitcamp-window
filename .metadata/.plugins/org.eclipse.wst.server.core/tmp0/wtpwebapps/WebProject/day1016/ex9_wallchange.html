@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+	body,h1,ul{padding: 0; margin: 0;}
+	li{list-style: none;}
+	body{background-color: #fff;}
+	.wall{
+		width: 800px; height: 600px;
+		margin: 50px auto;
+		background-color: #999;
+		position: relative;
+		box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		border-radius: 5px;
+		border: 5px solid #333;
+		overflow: hidden; /*스크롤바 숨기기*/
+	}
+	
+	/*title 부분*/
+	.wall h1{
+		font-size: 37px;
+		position: absolute;
+		right: 50px;
+		top: 60px;
+		width: 130px;
+		font-family: 'Indie Flower', cursive;
+	}
+	
+	/*벽지 종류 부분*/
+	.wall .list{
+		background-color: rgba(0,0,0,0.9);
+		position: absolute;
+		bottom: 0; left: 0;
+		width: 100%; height: 100px;
+		border-top: 1px solid #666;
+	}
+	
+	.wall .list li{
+		float: left;
+		margin-left: 10px;
+		margin-top: 10px;
+		width: 70px; height: 70px;
+		border: 5px solid #333;
+		border-radius: 10px;
+		cursor: pointer; 
+	}
+	
+	.wall .list li img{width: 100%;}
+	
+	/*jquery에서 사용할 클래스 지정*/
+	.wall .list li.active{
+		border-color: #8dff07;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		// 벽지이미지에서 클릭하면 그 부모태그인 li에 
+		// class active를 추가한다
+		$('.list li img').click(function(){
+			$(this).parent().addClass('active');
+			$(this).parent().siblings('li').removeClass('active');
+			// 클릭한 이미지의 title을 변수명 title에 얻는다
+			var title = $(this).attr('title');
+			// title을 h1태그의 .title에 넣는다
+			$('h1.title').text(title);
+			// 클릭한 이미지의 src를 얻는다(변수명 imgsrc)
+			var imgsrc = $(this).attr('src');
+			// imgsrc를 .wall의 배경 이미지로 넣어준다(url사용)
+			$('div.wall').css('background-image','url('+imgsrc+')');
+		});
+	});
+</script>
+</head>
+<body>
+<div class='wall'>
+	<h1 class='title'>Select Paper</h1>
+	<img src='../image2/cover2.png'>
+	<ul class='list'>
+		<li>
+			<img src='../image2/b01.png' title='Pear'>
+		</li>
+		<li>
+			<img src='../image2/b02.png' title='Checker'>
+		</li>
+		<li>
+			<img src='../image2/b03.png' title='Bamboo'>
+		</li>
+		<li>
+			<img src='../image2/b04.png' title='School'>
+		</li>
+		<li>
+			<img src='../image2/b05.png' title='Leap'>
+		</li>
+		<li>
+			<img src='../image2/b06.png' title='Forest'>
+		</li>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	#out{
+		position: absolute;
+		top: 60px;
+		left: 10px;
+		font-size: 14px;
+	}
+	
+	table thead tr{
+		height: 40px;
+		background-color: pink;
+		color: blue;
+		font-size: 14px;
+	}
+	
+	table thead tr th{
+		border-bottom: 3px double gray;
+		border-right: 1px solid gray;
+	}
+	
+	table tbody tr, table tbody td{
+		border: 1px solid gray;
+		border-collapse: collapse;
+		font-size: 12px;
+		text-align: center;
+		height: 30px;
+	}
+</style>
+<script type="text/javascript">
+var xhr;
+window.onload=function(){
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+		//alert('크롬,ie')
+	}else{
+		alert('Ajax를 지원하지 않는 브라우저입니다');
+	}
+	
+	// 버튼 이벤트
+	document.getElementById('btn1').onclick=function(){
+		xhr.open('get','sawonxml.jsp',true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status==200){
+					//alert('성공');
+					process();
+				}
+			}
+		}
+		xhr.send(null);
+	}
+	// 데이터처리 & 출력
+	function process(){
+		//xml로 데이터 가져오기
+		var data = xhr.responseXML;
+		var s = "<h2>Sawon DB 데이터 가져오기</h2>";
+		s+= "<table><thead><tr>";
+		s+= "<th width='50'>번호</th><th width='80'>사원명</th>";
+		s+= "<th width='80'>부서</th><th width='100'>급여</th>";
+		s+= "<th width='100'>세금</th></tr></thead>";
+		
+		//총 사원수
+		var len=data.getElementsByTagName('item').length;
+		//alert(len);
+		
+		var name = data.getElementsByTagName('name');
+		var buseo = data.getElementsByTagName('buseo');
+		var pay = data.getElementsByTagName('pay');
+		var paytax = data.getElementsByTagName('tax');
+		
+		//인원수만큼 반복해서 데이터 출력하기
+		s+="<tbody>";
+		for(var i=0; i<len; i++){
+			s+= "<tr>";
+			s+= "<td>" + (i+1) + "</td>";
+			s+= "<td>"+name[i].childNodes[0].nodeValue+"</td>";
+			s+= "<td>"+buseo[i].childNodes[0].nodeValue+"</td>";
+			s+= "<td style='text-align:right;'>"+pay[i].childNodes[0].nodeValue+"</td>";
+			s+= "<td style='text-align:right;'>"+paytax[i].childNodes[0].nodeValue+"</td>";
+			s+= "</tr>"
+		}
+		s+="</tbody>";
+		s+= "</table>";
+		document.getElementById('out').innerHTML = s;
+	}
+}
+</script>
+</head>
+<body>
+<button type='button' id='btn1'>Sawon 데이터 XML로 읽어오기</button>
+<div id='out'></div>
+</body>
+</html>

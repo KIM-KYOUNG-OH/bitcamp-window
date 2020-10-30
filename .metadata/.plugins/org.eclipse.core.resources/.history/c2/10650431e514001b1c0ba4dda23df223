@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	#btn{
+		margin-left: 300px;
+	}
+	
+	#btn span{
+		font-size: 30px;
+		margin-left: 20px;
+		cursor: pointer;
+	}
+	
+	#btn span:hover{
+		color: red;
+	}
+	
+	img{
+		margin-top: 10px;
+		border: 1px solid gray;
+		padding: 20px;
+	}
+	
+	table{
+		text-align: center;
+	}
+	
+	table#tb1 tr td:hover{
+		background-color: LightGray;
+		cursor: pointer;
+	}
+	
+	table#tb2 tbody tr:hover{
+		background-color: LightGray;
+		cursor: pointer;
+	}
+	
+	table th{
+		text-align: center;
+	}
+	
+	#out{
+		width: 980px;
+	}
+	
+</style>
+<script type="text/javascript">
+$(function(){
+	init();
+	$("#btn span").eq(0).click(function(){
+		$("#btn span:first").css("color","red");
+		$("#btn span:last").css("color","black");
+		// 확대
+		$.ajax({
+			type:"get",
+			url:"./ex5_board_to_xml.jsp",
+			dataType:"xml",
+			success: function(data){
+				var s = "";
+				s += "<table id='tb1' class='table table-striped'><tr>";
+				$(data).find('board').each(function(i, elem){
+					var n = $(elem);
+					s += "<td>";
+					s += "<img src='../image2/"+n.find('photo').text()+"'><br>";
+					s += "번호 : " +n.attr('num') +"<br>";
+					s += "작가 : " +n.attr('writer') +"<br>";
+					s += "작성일 : " +n.find('writeday').text()+ "</td>";
+					if(i%4==3){
+						s+= "</tr><tr>";
+					}
+				});
+				s.substring(0, s.length-8);
+				s += "<td></td><td></td></tr></table>";
+				$("#out").html(s);
+			}
+		});
+	});
+	$("#btn span").eq(1).click(function(){
+		$("#btn span:first").css("color","black");
+		$("#btn span:last").css("color","red");
+		
+		// 목록
+		$.ajax({
+			type:"get",
+			url:"./ex5_board_to_xml.jsp",
+			dataType:"xml",
+			success: function(data){
+				var s = "<table id='tb2' class='table table-striped' style='width:800px'>";
+				s += "<thead><tr bgcolor='orange'>";
+				s += "<th>번호</th><th>작가</th><th>제목</th><th>내용</th><th>작성일</th><tr></thead>";
+				s += "<tbody>";
+				$(data).find('board').each(function(i, elem){
+					var n = $(elem);
+					s += "<tr>";
+					s += "<td>" +n.attr('num')+ "</td>";
+					s += "<td>" +n.attr('writer')+ "</td>";
+					s += "<td>" +n.find('subject').text()+ "</td>";
+					s += "<td>" +n.find('content').text()+ "</td>";
+					s += "<td>" +n.find('writeday').text()+ "</td>";
+					s += "</tr>";
+				});
+				$("#out").html(s);
+			}
+		});
+	});
+	
+	$(document).on("click", "#tb1 tr", function() {
+		alert("table1 입니다")
+	});
+	
+	$(document).on("click", "#tb2 tbody tr", function() {
+		alert("table2 입니다")
+	});
+	
+	$(document).on("mouseover", "#tb1 tbody tr", function(e) {
+		$("div.tooltip").css({
+			"left":e.pageX+"px",
+			"top":e.pageY+"px"
+		}).show();
+		$("div.tooltip").append("이미지와 내용");
+	});
+});
+
+function init(){
+	$("#btn span:first").css("color","red");
+	$("#btn span:last").css("color","black");
+	// 확대
+	$.ajax({
+		type:"get",
+		url:"./ex5_board_to_xml.jsp",
+		dataType:"xml",
+		success: function(data){
+			var s = "";
+			s += "<table id='tb1' class='table table-striped'><tr>";
+			$(data).find('board').each(function(i, elem){
+				var n = $(elem);
+				s += "<td>";
+				s += "<img src='../image2/"+n.find('photo').text()+"'><br>";
+				s += "번호 : " +n.attr('num') +"<br>";
+				s += "작가 : " +n.attr('writer') +"<br>";
+				s += "작성일 : " +n.find('writeday').text()+ "</td>";
+				if(i%4==3){
+					s+= "</tr><tr>";
+				}
+			});
+			s.substring(0, s.length-8);
+			s += "<td></td><td></td></tr></table>";
+			$("#out").html(s);
+		}
+	});
+}
+
+</script>
+</head>
+<body>
+<div class='tooltip'>Tooltip</div>
+<div id='btn'>
+	<span class="glyphicon glyphicon-th-large"></span>
+	<span class="glyphicon glyphicon-th-list"></span>
+</div>
+<hr>
+<div id="out"></div>
+</body>
+</html>

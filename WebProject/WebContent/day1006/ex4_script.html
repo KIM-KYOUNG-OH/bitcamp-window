@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body onload="alert('안녕하세요')">
+	<h1>Java Script 연습</h1>
+	<button type="button" onclick="alert('버튼1 클릭!!!')">버튼1</button>
+	<input type="button" value="버튼2" onclick="hello()">
+	<input type="button" value="버튼3"  onclick="hello2('Hello HTML')">
+	<input type="button" value="오렌지" onclick="hello3(value)"><!-- this.value 인데 this 생략가능 -->
+	<input type="button" value="합계구하기" onclick="sum(7,8)">
+	<script type="text/javascript">
+		function hello(){
+			alert("버튼2번 클릭함!!");
+		}
+		
+		function hello2(msg){
+			alert("버튼3번 클릭함!!\n"+msg);//msg는 다음줄에 출력
+		}
+		
+		function hello3(title)
+		{
+			alert(title+" 버튼을 눌럿어요");
+		}
+		function sum(su1,su2)
+		{
+			alert(su1+"+"+su2+"="+(su1+su2));
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+

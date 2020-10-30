@@ -1,0 +1,9 @@
+[
+	{"term":"컴퓨터의 이해","part":"no.1","definition":"하드웨어알기",
+	"quote":["hello","happy"],"author":"Lee yj"},
+	{"term":"스프링의 이해","part":"no.2","definition":"스프링알기",
+	"author":"candy"},
+	{"term":"제이쿼리의 이해","part":"no.3","quote":["ajax","effect"],
+	"author":"강호동"},
+	{"term":"HTML의 이해","part":"no.4"}
+]

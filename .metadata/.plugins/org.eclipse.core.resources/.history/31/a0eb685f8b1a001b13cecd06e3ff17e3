@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style type="text/css">
+	div.boards{
+		float: left;
+		margin: 30px;
+		border: 1px solid gray;
+		box-shadow: 10px 10px 10px grey;
+		width: 200px;
+	}
+	
+	.board_title{
+		display: none;
+	}
+	
+	.icon{
+		text-align: right;
+	}
+	
+	.add_data:hover{
+		cursor: pointer;
+		font-weight: bold;
+		color: green;
+	}
+	
+	#dialog-form>form{
+		position: absolute;
+		left: 100px;
+		top: 100px;
+		width: 300px;
+		border: 1px solid black;
+		background-color: white;
+		z-index: 10;
+		padding: 10px;
+	}
+	
+	#update-form>form{
+		position: absolute;
+		left: 100px;
+		top: 100px;
+		width: 300px;
+		border: 1px solid black;
+		background-color: white;
+		z-index: 10;
+		padding: 10px;
+	}
+	
+	div.lst:hover{
+		background-color: rgb(211,211,211);
+		cursor: pointer;
+		
+	}
+	
+	div.lst{
+		margin: 5px;
+	}
+	
+	img.imgs{
+		width: 188px;
+	}
+	
+</style>
+</head>
+<script type="text/javascript">
+$(function(){
+	$("#dialog-form").hide();
+	$('#update-form').hide();
+	showDatas();
+	
+	$("#create_data").click(function(){
+		$("#dialog-form").show();
+	});
+	
+	// 노트 추가
+	$("#btnadd").click(function(){
+		var title = $("#title").val();
+		var description = $("#description").val();
+		var imageValue = $("#image").val().split("\\");
+		var image = imageValue[imageValue.length-1];
+		var dueDate = $("#dueDate").val();
+		$.ajax({
+			type:'get',
+			url:'./insertdata.jsp',
+			datatype:'html',
+			data:{"title":title,"description":description,
+				"image":image,"dueDate":dueDate},
+			success:function(data){
+				showDatas();
+			}
+		});
+	});
+	
+	// insert폼창 닫기
+	$("#btncancel").click(function(){
+		$("#title").val('');
+		$("#description").val('');
+		$("#comment").val('');
+		$("#image").val('');
+		$("#dueDate").val('');
+		$("#dialog-form").hide();
+	});
+	
+	// 데이터 클릭시 form창 열기
+	$(document).one('click', 'div.lst', function(data) {
+		$('#update-form').show();
+		var num = $(this).attr("num");
+		showFormData(num);
+	})
+	
+	// update폼창 닫기
+	$('#up_btncancel').click(function(){
+		//$("#up_title").val('');
+		//$("#up_description").val('');
+		//$("#up_comment").val('');
+		//$("#up_image").val('');
+		//$("#up_dueDate").val('');
+		$('#update-form').hide();
+	});
+	
+	// update
+	$("#btnupdate").click(function(){
+		var num = $("#up_title").attr('num');
+		var title = $("#up_title").val();
+		var description = $("#up_description").val();
+		var commention = $("#up_comment").val();
+		console.log(commention);
+		var imageValue = $("#up_image").val().split("\\");
+		var image = imageValue[imageValue.length-1];
+		var dueDate = $("#up_dueDate").val();
+		updateData(num,title,description,commention,image,dueDate);
+	});
+	
+	//insert form창 작은 이미지
+	$("#image").change(function(){
+		console.log("1:"+$(this)[0].files.length);
+		console.log("2:"+$(this)[0].files[0]);
+		
+		if($(this)[0].files[0]){
+			var reader = new FileReader();
+			reader.onload=function(e){
+				$("#showimg").attr("src",e.target.result);
+			}
+			reader.readAsDataURL($(this)[0].files[0]);
+		}
+	});
+	
+	//update form창 작은 이미지
+	$("#up_image").change(function(){
+		console.log("1:"+$(this)[0].files.length);
+		console.log("2:"+$(this)[0].files[0]);
+		
+		if($(this)[0].files[0]){
+			var reader = new FileReader();
+			reader.onload=function(e){
+				$("#up_showimg").attr("src",e.target.result);
+			}
+			reader.readAsDataURL($(this)[0].files[0]);
+		}
+	});
+	
+	$("#chat").click(function(){
+		var a = localStorage['email'].split('@');
+		var name = a[0];
+		var t = $("#up_comment").html();
+		var message = $("#up_input_comment").val();
+		var s = name + ">><br>&nbsp;" +message+"<br>";
+		$("#up_input_comment").val('');
+		t += s;
+		if(message.length>0){
+			$("#up_comment").html(t);
+		}
+	});
+});
+
+function updateData(num,title,description,commention,image,dueDate){
+	$.ajax({
+		type: 'get',
+		url: './updatedata.jsp',
+		dataType: 'html',
+		data:{"num":num,"title":title,"description":description,"commention":commention,
+			"image":image,"dueDate":dueDate},
+		success:function(data){
+			showDatas();
+		}
+	});
+}
+
+function showFormData(num){
+	$.ajax({
+		type: 'post',
+		url: "./getdata.jsp",
+		dataType:'json',
+		data:{"num":num},
+		success:function(data){
+			$("#up_title").attr('num',data.num);
+			$("#up_title").val(data.title);
+			$("#up_description").val(data.description);
+			var s = data.commention;
+			$("#up_comment").html(s);
+			//$("#up_image").val(data.image);
+			$("#up_dueDate").val(data.dueDate);
+			
+		}
+	});
+}
+
+function showDatas(){
+	$.ajax({
+		type: 'post',
+		url: "./showdatas.jsp",
+		dataType:'json',
+		success:function(data){
+			var s = '';
+			$(data).each(function(i, elt) {
+				s += "<div class='lst' num='"+elt.num+"'>";
+				s += "<b>"+(i+1)+". <span id='key'>"+elt.title+ "</span></b><br>";
+				if(elt.description){
+					s += "<span class='glyphicon glyphicon-align-left'></span><br>";
+				}
+				if(elt.image){
+					s += "<img class='imgs' src='../image/"+elt.image+"'>";
+				}
+				s += "</div><hr>";
+			});
+			
+			$("#datas").html(s);
+		}
+	});
+}
+
+</script>
+<body>
+<div id="dialog-form">
+  <form>
+	<fieldset>
+	<h4 style='text-align: center;'><b>노트 추가</b></h4><br>
+		<label>title</label><br>
+		<input type="text" id="title" placeholder="노트명 입력"><br>
+		<label>description</label><br>
+		<textarea id="description" rows='8' cols='35'></textarea><br>
+		<label>image</label>
+		<input type="file" accept="image/*" id="image"><br>
+		<img id = "showimg" style="width:140px;"><br>
+		<label>dueDate</label>
+		<input type="date" id="dueDate"><br>
+		<button id="btnadd" type="submit" class="btn btn-success">노트 추가</button>&nbsp;
+		<button id="btncancel" type='button' class="btn btn-danger">cancel</button>
+	</fieldset>
+  </form>
+</div>
+
+<div id="update-form">
+  <form>
+	<fieldset>
+	<h4 style='text-align: center;'><b>노트 정보</b></h4><br>
+		<label>title</label><br>
+		<input type="text" id="up_title" placeholder="노트명 입력"><br>
+		<label>description</label><br>
+		<textarea id="up_description" style='overflow:scroll; width:268px; height: 166px;' rows='8' cols='35'></textarea><br>
+		<label>commention</label><br>
+		<input type="text" id="up_input_comment" placeholder="코멘트 입력">
+		&nbsp;<button type="button" id='chat' class="btn btn-success" style="height: 28px; width: 80px; ">Enter</button><br>
+		<div id="up_comment" style='overflow:scroll; width:268px; height: 166px;'></div><br>
+		<label>image</label>
+		<input type="file" accept="image/*" id="up_image"><br>
+		<img id = "up_showimg" style="width:140px;"><br>
+		<label>dueDate</label>
+		<input type="date" id="up_dueDate"><br>
+		<button id="btnupdate" type="submit" class="btn btn-success">노트 수정</button>&nbsp;
+		<button id="btndelete" type="button" class="btn btn-warning">노트 삭제</button>&nbsp;
+		<button id="up_btncancel" type='button' class="btn btn-danger">cancel</button>
+	</fieldset>
+  </form>
+</div>
+
+<div id='head'></div>
+	<span class="glyphicon glyphicon-home"></span>&nbsp;
+	<select>
+		<option>Boards</option>
+		<option>Calendar</option>
+	</select>
+	<span id='user'>user</span>
+	<span>logout</span>
+	<hr>
+<div id='body'></div>
+	<div class='boards'><h3>To Do</h3>
+		<span class="add_data glyphicon glyphicon-plus" id='create_data'></span>&nbsp;
+	</div><hr>
+	<div id='datas' class='daaas'></div>
+	</div>
+	
+	<div class='boards'><h3>Doing</h3>
+	<hr></div>
+	<div class='boards'><h3>Done</h3>
+	<hr></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

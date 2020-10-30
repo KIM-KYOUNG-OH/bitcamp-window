@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<img src= "../image/13.JPG" class='img-circle' style='width: 100px;'>
+<img src= "../image2/image_01.png" class='img-thumbnail' style='width: 100px;'>
+<div class='alert alert-success' style="width: 300px;">
+	Get 방식의 폼데이터 읽기
+</div>
+<form action='readdata1.jsp' method='get'>
+	<table class='table table-bordered' style='width: 300px;'>
+		<tr>
+			<th style='width: 100px; background-color: pink;text-align: center; line-height: 30px;'>이름</th>
+			<td>
+				<input type='text' name='name' class='form-control input-sm'>
+			</td>
+		</tr>
+		<tr>
+			<th style='width: 100px; background-color: pink;text-align: center; line-height: 30px;'>성별</th>
+			<td class='form-inline'> <!-- 가로방향 나열할때 -->
+				<input type='radio' name='gender' class='form-control' value='남자' checked='checked'> 남자
+				<input type='radio' name='gender' class='form-control' value='여자'> 여자
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2' align='center'>
+				<button type='submit' class="btn btn-success">서버전송</button>
+				<button type='reset' class="btn btn-info">값초기화</button>
+			</td>
+		</tr>
+	</table>
+</form>
+<hr>
+<div class='alert alert-danger' style="width: 300px;">
+	Post 방식의 폼데이터 읽기
+</div>
+
+</body>
+</html>
