@@ -1,5 +1,0 @@
-package ajax.sawon.db;
-
-public interface PhotoBoard {
-
-}

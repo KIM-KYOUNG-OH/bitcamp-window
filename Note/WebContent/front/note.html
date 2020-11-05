@@ -13,6 +13,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <style type="text/css">
+	span#logout:hover{
+		font-weight: bold;
+		color: red;
+		cursor: pointer;
+	}
+	
+	#home:hover{
+		font-weight: bold;
+		color: red;
+		cursor: pointer;
+	}
+	
+	div#head{
+		font-size: 25px;
+	}
+	
 	div.boards{
 		float: left;
 		margin: 30px;
@@ -79,6 +95,15 @@
 </head>
 <script type="text/javascript">
 $(function(){
+	$('#home').click(function(){
+		location.href = 'note.html';	
+	});
+	var user_lst = localStorage['email'].split('@');
+	var user = user_lst[0];
+	$('#user').html('user: '+user)
+	$('#logout').click(function(){
+		location.href = 'login.html';
+	});
 	$("#dialog-form").hide();
 	$('#update-form').hide();
 	showDatas();
@@ -118,18 +143,13 @@ $(function(){
 	
 	// 데이터 클릭시 form창 열기
 	$(document).one('click', 'div.lst', function(data) {
-		$('#update-form').show();
+		$('#update-form').modal();
 		var num = $(this).attr("num");
 		showFormData(num);
 	})
 	
 	// update폼창 닫기
 	$('#up_btncancel').click(function(){
-		//$("#up_title").val('');
-		//$("#up_description").val('');
-		//$("#up_comment").val('');
-		//$("#up_image").val('');
-		//$("#up_dueDate").val('');
 		$('#update-form').hide();
 	});
 	
@@ -265,6 +285,70 @@ function showDatas(){
 
 </script>
 <body>
+	<div class="modal fade" id="dialog-form" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<form>
+					<fieldset>
+						<h4 style='text-align: center;'>
+							<b>노트 추가</b>
+						</h4>
+						<br> <label>title</label><br> <input type="text"
+							id="title" placeholder="노트명 입력"><br> <label>description</label><br>
+						<textarea id="description" rows='8' cols='35'></textarea>
+						<br> <label>image</label> <input type="file" accept="image/*"
+							id="image"><br> <img id="showimg"
+							style="width: 140px;"><br> <label>dueDate</label> <input
+							type="date" id="dueDate"><br>
+						<button id="btnadd" type="submit" class="btn btn-success">노트
+							추가</button>
+						&nbsp;
+						<button id="btncancel" type='button' class="btn btn-danger">cancel</button>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="update-form" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<form>
+					<fieldset>
+						<h4 style='text-align: center;'>
+							<b>노트 정보</b>
+						</h4>
+						<br> <label>title</label><br> <input type="text"
+							id="up_title" placeholder="노트명 입력"><br> <label>description</label><br>
+						<textarea id="up_description"
+							style='overflow: scroll; width: 268px; height: 166px;' rows='8'
+							cols='35'></textarea>
+						<br> <label>commention</label><br> <input type="text"
+							id="up_input_comment" placeholder="코멘트 입력"> &nbsp;
+						<button type="button" id='chat' class="btn btn-success"
+							style="height: 28px; width: 80px;">Enter</button>
+						<br>
+						<div id="up_comment"
+							style='overflow: scroll; width: 268px; height: 166px;'></div>
+						<br> <label>image</label> <input type="file" accept="image/*"
+							id="up_image"><br> <img id="up_showimg"
+							style="width: 140px;"><br> <label>dueDate</label> <input
+							type="date" id="up_dueDate"><br>
+						<button id="btnupdate" type="submit" class="btn btn-success">노트
+							수정</button>
+						&nbsp;
+						<button id="btndelete" type="submit" class="btn btn-warning">노트
+							삭제</button>
+						&nbsp;
+						<button id="up_btncancel" type='submit' class="btn btn-danger">cancel</button>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 
 <div id="dialog-form">
   <form>
 	<fieldset>
@@ -303,23 +387,25 @@ function showDatas(){
 		<input type="date" id="up_dueDate"><br>
 		<button id="btnupdate" type="submit" class="btn btn-success">노트 수정</button>&nbsp;
 		<button id="btndelete" type="submit" class="btn btn-warning">노트 삭제</button>&nbsp;
-		<button id="up_btncancel" type='button' class="btn btn-danger">cancel</button>
+		<button id="up_btncancel" type='submit' class="btn btn-danger">cancel</button>
 	</fieldset>
   </form>
 </div>
-
-<div id='head'></div>
-	<span class="glyphicon glyphicon-home"></span>&nbsp;
+ -->
+<div id='head'>
+	&nbsp;<span id='home' class="glyphicon glyphicon-home"></span>&nbsp;
 	<select>
 		<option>Boards</option>
 		<option>Calendar</option>
 	</select>
-	<span id='user'>user</span>
-	<span>logout</span>
+	<span id='user'></span>
+	&nbsp;<span id='logout'>LogOut</span>
 	<hr>
-<div id='body'></div>
+</div>
+<div id='body'>
 	<div class='boards'><h3>To Do</h3>
-	&nbsp;<span class="add_data glyphicon glyphicon-plus" id='create_data'>노트추가</span>
+	&nbsp;<span class="add_data glyphicon glyphicon-plus" id='create_data'
+	data-toggle="modal" data-target="#dialog-form">노트추가</span>
 	<hr>
 	<div id='datas' class='daaas'></div>
 </div>
@@ -328,7 +414,7 @@ function showDatas(){
 	<hr></div>
 	<div class='boards'><h3>Done</h3>
 	<hr></div>
-</body>
+</div>
 </html>
 
 

@@ -153,7 +153,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\java0901\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\java0901\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\WebProject" path="/WebProject" reloadable="true" source="org.eclipse.jst.jee.server:WebProject"/><Context docBase="C:\java0901\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Note" path="/Note" reloadable="true" source="org.eclipse.jst.jee.server:Note"/></Host>
+      <Context docBase="C:\java0901\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\java0901\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\WebProject" path="/WebProject" reloadable="true" source="org.eclipse.jst.jee.server:WebProject"/><Context docBase="C:\java0901\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Note" path="/Note" reloadable="true" source="org.eclipse.jst.jee.server:Note"/><Context docBase="C:\java0901\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\JspProject" path="/JspProject" reloadable="true" source="org.eclipse.jst.jee.server:JspProject"/><Context docBase="C:\java0901\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\miniProject" path="/miniProject" reloadable="true" source="org.eclipse.jst.jee.server:miniProject"/></Host>
     </Engine>
   </Service>
 </Server>

@@ -64,11 +64,13 @@ $(function(){
 			$("#alert").addClass("alert alert-danger");
 			var s = "<b>이메일 오류</b>";
 			$("#alert").html(s);
+			location.href = 'note.html';
 			
 		}else if(pwd != 'a1234'){
 			$("#alert").addClass("alert alert-danger");
 			var s = "<b>비밀번호 오류</b>";
 			alert(s);
+			location.href = 'note.html';
 		}else if(email == 'kdkg0434@gmail.com' && pwd == 'a1234'){
 			location.href = 'note.html';
 		}
