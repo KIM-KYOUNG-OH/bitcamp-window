@@ -108,6 +108,12 @@ $(function(){
 	String mainPage = "layout/main.jsp";
 	if(request.getParameter("main")!=null){
 		mainPage = request.getParameter("main");
+	}else{
+		%>
+		<script type="text/javascript">
+			localStorage.menu="menu1";
+		</script>
+		<%
 	}
 %>
 <body>
