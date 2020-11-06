@@ -1,7 +1,0 @@
-package ajax.note.db;
-
-public class NoteDao {
-	public NoteDao(){
-		
-	}
-}

@@ -1,8 +1,0 @@
-package ajax.note.db;
-
-public class NoteDao {
-	Oracleconnection db;
-	public NoteDao(){
-		db = OracleConnection.get
-	}
-}
