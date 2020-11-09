@@ -37,7 +37,7 @@
 				<button type="button" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=dto.getNum()%>'"
 				class="btn btn-info btn-sm">정보수정</button>
 				<br>
-				<button type="button" class="btn btn-danger btn-sm">
+				<button type="button" class="btn btn-danger btn-sm" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=dto.getId()%>'">
 				회원 탈퇴</button>
 			</td>
 		</tr>

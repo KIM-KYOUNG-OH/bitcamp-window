@@ -29,7 +29,7 @@
 <div id="title">금전출납부</div>
 <br>
 <div class="main">
-	<jsp:include page=""></jsp:include>
+	<jsp:include page="money/moneylist.jsp"/>
 </div>
 </body>
 </html>

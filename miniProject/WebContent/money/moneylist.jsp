@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-목록
+	<table>
+		<tr>
+			<th>번호</th><th>상품명</th><th>가격</th><th>출납일</th><th>수정</th>
+		</tr>
+		
+	</table>
 </body>
 </html>

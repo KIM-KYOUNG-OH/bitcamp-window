@@ -130,8 +130,7 @@ class="form-inline" name="memberform">
 		</tr>
 		<tr>
 			<td colspan='2' align='center'>
-				<button type="submit" class="btn btn-danger">
-				회원 정보 수정</button>
+				<button type="submit" class="btn btn-danger">회원 정보 수정</button>
 			</td>
 		</tr>
 	</table>
