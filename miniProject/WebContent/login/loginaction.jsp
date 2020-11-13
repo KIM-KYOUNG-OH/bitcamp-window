@@ -51,7 +51,7 @@
 		session.setAttribute("loginok", "success");
 		// 세션 유지시간 지정
 		session.setMaxInactiveInterval(60*60*24);
-		response.sendRedirect("../index.jsp?main=login/loginmain.jsp");
+		response.sendRedirect("../index.jsp");
 	}
 %>
 

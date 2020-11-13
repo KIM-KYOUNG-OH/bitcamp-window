@@ -28,13 +28,18 @@
     <fullyQualifiedTypeName name="data.dto.MemberDto2"/>
     <fullyQualifiedTypeName name="data.dto.MemberDto"/>
     <fullyQualifiedTypeName name="sun.text.resources.ar.JavaTimeSupplementary_ar"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="oracle.db.DbConnect"/>
     <fullyQualifiedTypeName name="data.dto.GuestDto"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
     <fullyQualifiedTypeName name="money.MoneyDto"/>
+    <fullyQualifiedTypeName name="data.dto.AnswerDto"/>
+    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="oracle.db.DbConnect"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="data.dto.ShopDto"/>
+    <fullyQualifiedTypeName name="data.dto.CartDto"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 </qualifiedTypeNameHistroy>

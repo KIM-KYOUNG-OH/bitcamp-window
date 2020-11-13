@@ -14,7 +14,6 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <style type="text/css">
 	body {
        min-width: 650px;

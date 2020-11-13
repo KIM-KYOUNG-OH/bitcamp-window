@@ -66,6 +66,11 @@ $(function(){
 <%
 	// 프로젝트의 경로 구하기
 	String url = request.getContextPath();
+
+	String loginok = (String)session.getAttribute("loginok");
+	
+	String myid = (String)session.getAttribute("myid");
+	
 %>
 <div class='mymenu'>
 	<ul>
@@ -76,9 +81,23 @@ $(function(){
 			<a href="<%=url%>/index.jsp?main=member/memberlist.jsp">회원목록</a>
 		</li>
 		<li class="menu3">
-			<a href="<%=url%>/index.jsp?main=guest/guestlist.jsp">방명록</a>
+			<%	
+				if(loginok!=null && myid.equals("admin")){
+					%>
+					<a href="<%=url%>/index.jsp?main=shop/addform.jsp">상품등록</a>
+					<%
+				}else{
+					%>
+					<a href="<%=url%>/index.jsp?main=shop/shoplist.jsp">상품목록</a>
+					<%
+				}
+			%>
+			
 		</li>
 		<li class="menu4">
+			<a href="<%=url%>/index.jsp?main=guest/guestlist.jsp">방명록</a>
+		</li>
+		<li class="menu5">
 			<a href="<%=url%>/index.jsp?main=board/boardlist.jsp">게시판</a>
 		</li>
 	</ul>
