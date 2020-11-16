@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="java.sql.Array"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="data.dto.ShopDto"%>
 <%@page import="data.dao.ShopDao"%>
 <%@page import="data.dao.MemberDao"%>
@@ -42,9 +45,38 @@
 		border: 1px solid black;
 		margin-left: 100px;
 	}
+	
+	div#answer{
+		margin-left: 300px;
+		margin-top: 30px;
+	}
+	
+	#content{
+		width: 300px;
+		height: 50px;
+		float: left;
+	}
+	
+	#addanswer{
+		width: 80px;
+		height: 50px;
+		line-height: 50px;
+		margin-left: 5px;
+	}
+	
+	.commentwriteday{
+		margin-left:900px;
+	}
+	
+	span.del:hover{
+		cursor: pointer;
+	}
 </style>
 <script type="text/javascript">
 $(function(){
+	// 처음 상품 디테일 출력시 기존 댓글도 출력하기
+	answerlist();
+	
 	$("img.small").first().addClass("select");
 	
 	$("img.small").click(function(){
@@ -62,7 +94,56 @@ $(function(){
 		$("#mycolor").val(mycolor);
 	});
 	
+	// 댓글 추가버튼 이벤트
+	$("#addanswer").click(function(){
+		//ajax 함수로 처리
+		//readanswer.jsp 로 myid,shopnum,content 3개를 보내서
+		//해당 jsp파일에서 db에 insert 한다
+		//성공하면 사용자함수 answerlist()를 호출하고
+		//입력창의 값들은 지워주세요
+		var myid=$("#myid").val();
+		var shopnum = $("#shopnum").val();
+		var content = $("#content").val();
+		console.log(myid,shopnum,content);
+		$.ajax({
+			type:"post",
+			dataType:"html",
+			url:"shop/readanswer.jsp",
+			data:{"myid":myid,"shopnum":shopnum,"content":content},
+			success:function(data){
+				answerlist();
+				$("#content").val("");
+			}
+		});
+	});
+	
+	//del 클릭시 댓글 삭제
+	$("span.del").click(function(){
+		
+	});
 });
+
+// 사용자함수 추가
+function answerlist(){
+	var shopnum = $("#shopnum").val();
+	//alert(shopnum);
+	$.ajax({
+		type:"get",
+		dataType:"xml",
+		url:"shop/answerlist.jsp",
+		data:{"shopnum":shopnum},
+		success:function(data){
+			var s = "";
+			$(data).find("answer").each(function(i,element){
+				var n = $(this);
+				s += "<b>"+n.find("name").text()+"</b>&nbsp;&nbsp;&nbsp;<span class='del glyphicon glyphicon-trash'></span>";
+				s += "<b class='commentwriteday'>"+n.find("writeday").text()+"</b><br><br>";
+				s += "<pre>"+n.find("content").text()+"</pre><hr>"
+			});
+			$("#comment").html(s);
+		}
+	});
+}
 </script>
 </head>
 <%
@@ -143,6 +224,24 @@ $(function(){
 		</tr>
 	</table>
 </form>
+<%
+// 댓글 입력창은 로그인을 해야만 보인다
+	if(loginok!=null){
+		
+%>
+<div id="answer">
+	<form id="answerfrm">
+		<input type="hidden" id="myid" value="<%=myid%>">
+		<input type="hidden" id="shopnum" value="<%=dto.getShopnum()%>">
+		
+		<textarea id="content" class="form-control"></textarea>
+		<button type="button" id="addanswer">추가</button>
+	</form>
+</div>
+<%}%>
+<div id="answerlist">
+	댓글 목록<hr><div id="comment"></div>
+</div>
 <script type="text/javascript">
 $("#btncart").click(function(){
 	var login = "<%=loginok%>";
