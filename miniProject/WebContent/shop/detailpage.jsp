@@ -71,6 +71,63 @@
 	span.del:hover{
 		cursor: pointer;
 	}
+	
+	/*댓글 목록 전체*/
+	#answerlist{
+		margin-left: 150px;
+		margin-top: 30px;
+		font-size: 14px;
+		width: 500px;
+	}
+	
+	/*댓글날짜 출력부분*/
+	span.aday{
+		float: right;
+		color: gray;
+	}
+	
+	/*답글버튼*/
+	span.abtn{
+		cursor: pointer;
+		width: 50px;
+		border: 1px solid black;
+		float: right;
+		font-size: 12px;
+	}
+	
+	pre.answer{
+		width: 300px;
+		margin-left: 160px;
+		font-weight: bold;
+	}
+	
+	div.shoptag{
+		width: 400px;
+		margin-left: 200px;
+		margin-bottom: 10px;
+	}
+	
+	div shoptag textarea{
+		float: left;
+		width: 300px;
+	}
+	
+	div.shoptag .shopsave{
+		width: 60px;
+		height: 55px;
+	}
+	
+	span.acancel{
+		cursor: pointer;
+		width: 60px;
+		font-weight: bold;
+	}
+	
+	span.adel{
+		font-size: 0.6em;
+		cursor: pointer;
+		margin-left:20px;
+	}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -117,16 +174,76 @@ $(function(){
 		});
 	});
 	
-	//del 클릭시 댓글 삭제
-	$("span.del").click(function(){
-		
+	// 답글달기
+	$(document).on("click","span.abtn",function(){
+		var idx = $(this).attr("idx");
+		//console.log(idx);
+		var tag = "<div class='shoptag'>";
+		tag += "<textarea class='form-control acontent'></textarea>";
+		tag += "<button class='shopsave btn btn-xs btn-danger' idx='"
+			+idx+ "'>저장</button>";
+		tag += "<span class='acancel'>취소</span></div>";
+		$(this).after(tag); // 답글달기 버튼 바로 아래에 추가
+		$(this).hide(); // 답글달기는 안보이게 처리
+	});
+	
+	// 주인 답글 취소
+	$(document).on("click","span.acancel",function(){
+		// 안보이게 처리했던 답글달기를 다시 보이게 하기
+		$(this).parent().prev('span.abtn').show();
+		// 바로 위의 태그인 div제거
+		$(this).parent('div.shoptag').remove();
+	});
+	
+	// 주인 답글 저장 부분
+	$(document).on("click","button.shopsave",function(){
+		var my = $(this);
+		var idx = $(this).attr("idx");
+		//console.log(idx);
+		var acontent = $(this).prev('.acontent').val();
+		//console.log(acontent);
+		if(acontent.length==0){
+			alert("답글을 입력후 저장해주세요");
+			return;
+		}else{
+			$.ajax({
+				type:"post",
+				dataType:"html",
+				url:"shop/answerupdate.jsp",
+				data:{"idx":idx,"acontent":acontent},
+				success:function(data){
+					my.parent().remove();
+					answerlist();
+				}
+			});
+		}
+	});
+	
+	// 댓글 삭제 아이콘 이벤트
+	$(document).on("click","span.adel",function(){
+		var idx=$(this).attr("idx");
+		var a = confirm("삭제하시겠습니까?");
+		// 취소일경우 함수 종료
+		if(!a){
+			return;
+		}
+		// 삭제
+		$.ajax({
+			type:"get",
+			dataType:"html",
+			url:"shop/deleteanswer.jsp",
+			data:{"idx":idx},
+			success:function(data){
+				answerlist();
+			}
+		});
 	});
 });
 
 // 사용자함수 추가
 function answerlist(){
-	var shopnum = $("#shopnum").val();
-	//alert(shopnum);
+	var loginid = $("#myid").val(); // 로그인한 아이디
+	var shopnum = $("#shopnum").val() // 현재 페이지 상품의 번호
 	$.ajax({
 		type:"get",
 		dataType:"xml",
@@ -136,11 +253,29 @@ function answerlist(){
 			var s = "";
 			$(data).find("answer").each(function(i,element){
 				var n = $(this);
-				s += "<b>"+n.find("name").text()+"</b>&nbsp;&nbsp;&nbsp;<span class='del glyphicon glyphicon-trash'></span>";
-				s += "<b class='commentwriteday'>"+n.find("writeday").text()+"</b><br><br>";
-				s += "<pre>"+n.find("content").text()+"</pre><hr>"
+				// 작성자
+				s += "<b>"+n.find("name").text()+"</b>";
+				// 삭제표시 본인것만 보이게
+				var myid = n.find("myid").text();
+				if(loginid==myid){
+					s+="<span class='adel glyphicon glyphicon-trash' idx='"+
+					n.find("idx").text()+"'></span>";
+				}
+				// 날짜
+				s += "<span class='aday'>" +n.find("writeday").text()+"</span><br>";
+				// 내용
+				s += "<pre class='acontent'>" +n.find("content").text()+"</pre>";
+				// 답글
+				var answer = n.find("shopanswer").text();
+				if(answer=='no'){
+					s+="<span class='abtn' idx='"
+					+n.find("idx").text()+"'>답글달기</span><br>";
+				}else{
+					s+= "<pre class='answer'>[샵주인]<br>"+answer+"</pre>";
+				}
+				s += "<hr>";
 			});
-			$("#comment").html(s);
+			$("#answerlist").html(s);
 		}
 	});
 }
@@ -240,7 +375,7 @@ function answerlist(){
 </div>
 <%}%>
 <div id="answerlist">
-	댓글 목록<hr><div id="comment"></div>
+	댓글 목록
 </div>
 <script type="text/javascript">
 $("#btncart").click(function(){

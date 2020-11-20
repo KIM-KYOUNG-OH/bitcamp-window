@@ -100,6 +100,9 @@ $(function(){
 		<li class="menu5">
 			<a href="<%=url%>/index.jsp?main=board/boardlist.jsp">게시판</a>
 		</li>
+		<li class="menu6">
+			<a href="<%=url%>/index.jsp?main=databoard/databoardlist.jsp">자료실</a>
+		</li>
 	</ul>
 </div>
 </body>

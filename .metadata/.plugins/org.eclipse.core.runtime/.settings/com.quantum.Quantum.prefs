@@ -2,7 +2,7 @@ com.quantum.actions.BookmarkSelectionUtil.bookmark=angel
 com.quantum.log.QuantumLog.logLevel=info
 eclipse.preferences.version=1
 org.eclipse.ui.examples.templateeditor.customtemplates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
-quantum.dialogs.bookmarkwizard.path=C\:\\java0901\\ojdbc6.jar
+quantum.dialogs.bookmarkwizard.path=C\:\\java0901\\work\\mysql-connector-java-5.0.5-bin.jar
 quantum.keyword.color=255,255,0
 quantum.string.color=128,255,255
 quantum.text.color=255,255,255

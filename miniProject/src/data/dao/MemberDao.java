@@ -24,7 +24,7 @@ public class MemberDao {
 		ResultSet rs = null;
 		String sql = "select * from member where id=?";
 		
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -78,7 +78,7 @@ public class MemberDao {
 				+"?,?,?,?,?,?,?,sysdate)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
@@ -104,7 +104,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * from member order by id asc";
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -137,7 +137,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * from member where num=?";
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, num);
@@ -172,7 +172,7 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "update member set id=?, name=?, pass=?, address=?, addrdetail=?, email=?, hp=? where num=?";
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
@@ -202,7 +202,7 @@ public class MemberDao {
 		ResultSet rs = null;
 		String sql = "select * from member where id=? and pass=?";
 		
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -226,7 +226,7 @@ public class MemberDao {
 		String sql = "delete from member where id=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -265,7 +265,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select name from member where id=?";
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt= conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -288,7 +288,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select num from member where id=?";
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);

@@ -175,6 +175,40 @@ public class ShopDao {
 			db.dbClose(conn, pstmt);
 		}
 	}
+	
+	// 전체 데이터 가져오기
+		public List<ShopDto> getNewSangpums(){
+			List<ShopDto> list = new ArrayList<ShopDto>();
+			Connection conn = null;
+			PreparedStatement pstmt= null;
+			ResultSet rs = null;
+			//  최신 상품 4개 가져오기
+			String sql = "select a.* from (select ROWNUM as RNUM,b.* from"
+					+ " (select * from shop order by shopnum desc)b)a where a.RNUM>=1 and a.RNUM<=4";
+			conn = db.getMyConnection();
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					ShopDto dto = new ShopDto();
+					dto.setShopnum(rs.getString("shopnum"));
+					dto.setCategory(rs.getString("category"));
+					dto.setSangpum(rs.getString("sangpum"));
+					dto.setPhoto(rs.getString("photo"));
+					dto.setPrice(rs.getInt("price"));
+					dto.setColor(rs.getString("color"));
+					dto.setIpgoday(rs.getString("ipgoday"));
+					
+					list.add(dto);
+					}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				db.dbClose(conn, pstmt, rs);
+			}
+			return list;
+		}
 }
 
 
