@@ -18,6 +18,7 @@ public class DbConnect {
 
 	public DbConnect() {
 		try {
+			// 1. JDBC 드라이버 로딩
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
 			System.out.println("오라클 드라이버 실패:" + e.getMessage());
@@ -28,6 +29,7 @@ public class DbConnect {
 	public Connection getGangsaConnection() {
 		Connection conn = null;
 		try {
+			// 2. 데이터베이스 커넥션 생성
 			conn = DriverManager.getConnection(gangsa_url, gangsa_id, gangsa_pass);
 		} catch (SQLException e) {
 			System.out.println("강사 pc 오라클 연결 실패:" +e.getMessage());

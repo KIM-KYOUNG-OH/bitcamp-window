@@ -2,6 +2,8 @@ package data.dto;
 
 import java.sql.Timestamp;
 
+import data.dao.DataBoardDao;
+
 public class DataBoardDto {
 	private String num;
 	private String myid;
@@ -83,7 +85,7 @@ public class DataBoardDto {
 			// 확장자 얻기
 			int dot = file.indexOf(".");
 			String fileExt = file.substring(dot+1);// 도트 다음번지부터 끝까지 추출
-			//System.out.println(fileExt);
+			// System.out.println(fileExt);
 			// 파일 확장자가 ext안에 있는지 확인
 			// 이미지가 있을경우 true이므로
 			// 반대로 이미지가 아닐경우 false가 된다
@@ -95,6 +97,12 @@ public class DataBoardDto {
 			}
 		}
 		return b;
+	}
+	
+	// 댓글 갯수 반환
+	public int getAnswerCount() {
+		DataBoardDao dao = new DataBoardDao();
+		return dao.getAnswerList(num).size();
 	}
 }
 

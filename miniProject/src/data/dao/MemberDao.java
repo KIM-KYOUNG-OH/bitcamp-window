@@ -48,7 +48,7 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		conn = db.getMyConnection();
+		conn = db.getGangsaConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+dong+"%");
@@ -142,6 +142,7 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, num);
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				dto = new MemberDto();
 				dto.setNum(rs.getString("num"));

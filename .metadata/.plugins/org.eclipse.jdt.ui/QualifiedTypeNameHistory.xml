@@ -38,14 +38,17 @@
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="mysql.db.MysqlConnect"/>
     <fullyQualifiedTypeName name="data.dto.BoardDto"/>
-    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
-    <fullyQualifiedTypeName name="oracle.db.DbConnect"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
-    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="data.dao.DataBoardDao"/>
+    <fullyQualifiedTypeName name="data.dto.DataBoardDto"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="data.dto.DataBoardDto"/>
+    <fullyQualifiedTypeName name="data.dto.DataAnswerDto"/>
+    <fullyQualifiedTypeName name="data.dao.DataBoardDao"/>
+    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="oracle.db.DbConnect"/>
+    <fullyQualifiedTypeName name="data.dto.SmartBoardDto"/>
 </qualifiedTypeNameHistroy>

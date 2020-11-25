@@ -92,7 +92,6 @@ $(function(){
 					<%
 				}
 			%>
-			
 		</li>
 		<li class="menu4">
 			<a href="<%=url%>/index.jsp?main=guest/guestlist.jsp">방명록</a>
@@ -102,6 +101,9 @@ $(function(){
 		</li>
 		<li class="menu6">
 			<a href="<%=url%>/index.jsp?main=databoard/databoardlist.jsp">자료실</a>
+		</li>
+		<li class="menu6">
+			<a href="<%=url%>/index.jsp?main=smartboard/smartlist.jsp">스마트 게시판</a>
 		</li>
 	</ul>
 </div>
